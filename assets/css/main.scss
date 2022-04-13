@@ -1,0 +1,29 @@
+@import '_color.scss';
+@import '_margin.scss';
+
+.custom-color-icon{
+  color: #d0dbe5 !important;   
+}
+.custom-color-icon:hover{
+  color: #52575d !important;
+}
+
+// add border buttom to avatar panel
+.custom-line-avatar-panel{
+  background-color: #ebf2f7;
+  border:#ebf2f7  1px solid;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+// custom navigation for admin panel
+@media only screen and (max-width:960px) {
+  .border-sm-none{
+    border-radius: none !important;
+
+  }
+}
+@media only screen and (min-width:960px) {
+  .border-radius-20{
+    border-radius: 20px !important;
+  }
+}
