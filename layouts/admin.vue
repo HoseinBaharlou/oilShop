@@ -1,26 +1,11 @@
 <template>
   <v-app class="admin">
     <v-main style="background:#EAF2FF !important">
-      <!-- start notification and ........ -->
-    <v-container class="hidden-md-and-down">
-      <v-row>
-        <v-col col="12" class="mt-14">
-          <v-btn fab light elevation="0" class="mx-2">
-            <v-icon class="custom-color-icon">mdi-account-outline</v-icon>
-          </v-btn>
-          <v-btn fab light elevation="0" class="mx-2">
-            <v-icon class="custom-color-icon">mdi-bell-outline</v-icon>
-          </v-btn>
-          <v-btn fab light elevation="0" class="mx-2">
-            <v-icon class="custom-color-icon">mdi-magnify</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
+    <!-- start notification and ........ -->
+    <Notification />
     <!-- start notification and ........ -->
     <!-- start navbar -->
-
-    <v-app-bar elevation="0" class="hidden-lg-and-up" color="dark" dark absolute>
+    <v-app-bar elevation="0" class="hidden-lg-and-up " color="dark" dark>
       <v-btn small elevation="0" @click="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -37,11 +22,12 @@
         </v-btn>
       </section>
     </v-app-bar>
+    <!-- end navbar -->
 
     <v-container>
       <v-row>
-      <!-- start navigation mobile -->
-        <v-col md="3">
+      <!-- start navigation mobile and desktop -->
+        <v-col md="3" v-show="drawer">
           <v-navigation-drawer v-model="drawer" :stateless="stateless" class="white border-radius-20 elevation-9" :app="app" right>
           <!-- start avatar item -->
           <v-list dense class="px-5">
@@ -63,12 +49,10 @@
           <Vlist class="pb-15"/>
           <!-- end items -->
           </v-navigation-drawer>
-          <!-- end navigation mobile -->
         </v-col>
-      <!-- end navigation -->
-
+      <!-- end navigation mobile and desktop -->
       <!-- start render page -->
-        <v-col md="9">
+        <v-col md="9" cols="12">
           <Nuxt />
         </v-col>
       <!-- end render page -->
@@ -83,24 +67,29 @@
 </style>
 <script>
 import Vlist from '../components/partials/vlist.vue';
+import Notification from '../components/partials/dashboard/notification.vue'
 export default{
-  components:{Vlist},
+  components:{Vlist,Notification},
   data:()=>{
     return {
-      drawer:true,
+      drawer:false,
       stateless:true,
       app:false
     }
   },
   created: function () {
-    if(this.$vuetify.breakpoint.name == "sm" || this.$vuetify.breakpoint.name == "md" ){
-      this.stateless = true
-      this.app = true
+    if(process.client){
+      if(window.innerWidth < 960){
+        this.stateless = false
+        this.app = true
+      }else{
+        this.stateless = true
+        this.app = false
+        this.drawer = true
+      }
     }
-    if(this.$vuetify.breakpoint.name == "lg" || this.$vuetify.breakpoint.name == "xl"){
-      this.stateless = true
-      this.app = false
-      this.drawer = true
+    else{
+      
     }
   }
 }
