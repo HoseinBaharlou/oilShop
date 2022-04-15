@@ -33,19 +33,21 @@
         </v-list-item>
       </nuxt-link>
 
-      <v-list-item>
-        <!-- start icon -->
-        <v-list-item-icon class="ml-2 my-3">
-          <v-icon class="custom-color-icon">mdi-file-outline</v-icon>
-        </v-list-item-icon>
-        <!-- end icon -->
+      <nuxt-link to="/dashboard/fileManager">
+        <v-list-item>
+          <!-- start icon -->
+          <v-list-item-icon class="ml-2 my-3">
+            <v-icon class="custom-color-icon">mdi-file-outline</v-icon>
+          </v-list-item-icon>
+          <!-- end icon -->
 
-        <!-- start title -->
-        <v-list-item-content>
-          <v-list-item-title>مدیریت فایل</v-list-item-title>
-        </v-list-item-content>
-        <!-- end title -->
-      </v-list-item>
+          <!-- start title -->
+          <v-list-item-content>
+            <v-list-item-title>مدیریت فایل</v-list-item-title>
+          </v-list-item-content>
+          <!-- end title -->
+        </v-list-item>
+      </nuxt-link>
 
     </v-list-item-group>
   </v-list>

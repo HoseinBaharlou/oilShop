@@ -33,7 +33,7 @@
           <v-list dense class="px-5">
             <v-list-item class="custom-avatar-panel white">
               <v-list-item-avatar>
-                <v-img src="icons/Profile_image.svg" />
+                <v-img src="../icons/Profile_image.svg" />
               </v-list-item-avatar>
 
               <v-list-item-title>احسان مهدوی</v-list-item-title>
