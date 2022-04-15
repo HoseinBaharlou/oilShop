@@ -61,7 +61,7 @@ export default {
     }
   },
   components:{linerChart,Trafic},
-  layout:'admin'
+  layout:'dashboard'
 }
 </script>
 <style>

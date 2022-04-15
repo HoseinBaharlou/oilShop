@@ -1,16 +1,62 @@
 <template>
   <v-list class="mt-4 mx-5 py-0">
-    <section class="mb-md-180">
-      <v-list-item class="white custom-list-item" to="/" ripple="">
+    <v-list-item-group active-class="custom-list-item-active" class="custom-list-item">
+      <nuxt-link to="/dashboard">
+        <v-list-item>
+          <!-- start icon -->
+          <v-list-item-icon class="ml-2 my-3">
+            <v-icon class="custom-color-icon">mdi-view-dashboard-outline</v-icon>
+          </v-list-item-icon>
+          <!-- end icon -->
+
+          <!-- start title -->
+          <v-list-item-content>
+            <v-list-item-title>داشبرد</v-list-item-title>
+          </v-list-item-content>
+          <!-- end title -->
+        </v-list-item>
+      </nuxt-link>
+
+      <nuxt-link to="/dashboard/Tradeview">
+        <v-list-item>
+        <!-- start icon -->
         <v-list-item-icon class="ml-2 my-3">
-          <v-icon class="custom-color-icon">mdi-view-dashboard-outline</v-icon>
+          <v-icon class="custom-color-icon">mdi-tune-vertical</v-icon>
         </v-list-item-icon>
+        <!-- end icon -->
+
+        <!-- start title -->
+        <v-list-item-content>
+          <v-list-item-title>نمای تجاری</v-list-item-title>
+        </v-list-item-content>
+        <!-- end title -->
+        </v-list-item>
+      </nuxt-link>
+
+      <v-list-item>
+        <!-- start icon -->
+        <v-list-item-icon class="ml-2 my-3">
+          <v-icon class="custom-color-icon">mdi-file-outline</v-icon>
+        </v-list-item-icon>
+        <!-- end icon -->
+
+        <!-- start title -->
+        <v-list-item-content>
+          <v-list-item-title>مدیریت فایل</v-list-item-title>
+        </v-list-item-content>
+        <!-- end title -->
+      </v-list-item>
+
+    </v-list-item-group>
+  </v-list>
+  <!-- <v-list-item to="/dashboard" ripple="false">
+        
         <v-list-item-content>
           داشبرد
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item to="/dashboard/Tradeview">
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-tune-vertical</v-icon>
         </v-list-item-icon>
@@ -19,7 +65,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-file-outline</v-icon>
         </v-list-item-icon>
@@ -28,7 +74,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-poll</v-icon>
         </v-list-item-icon>
@@ -37,7 +83,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-account-multiple</v-icon>
         </v-list-item-icon>
@@ -46,7 +92,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-calendar-range</v-icon>
         </v-list-item-icon>
@@ -55,7 +101,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-forum</v-icon>
         </v-list-item-icon>
@@ -64,41 +110,32 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="white custom-list-item">
+      <v-list-item>
         <v-list-item-icon class="ml-2 my-3">
           <v-icon class="custom-color-icon">mdi-credit-card</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-badge color="grey darken-3" content="6"
-          offset-x="80"
+          offset-x="20"
           offset-y="18">
             مبالغ دریافتی
           </v-badge>
         </v-list-item-content>
-      </v-list-item>
-    </section>
-
-    <section class="custom-item-exit">
-      <hr class="custom-line-avatar-panel">
-      <v-list-item class="white">
-        <v-list-item-icon class="ml-2 my-3">
-          <v-icon class="custom-color-icon">mdi-exit-to-app</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>خروج</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </section>
-  </v-list>
+      </v-list-item> -->
 </template>
-<style scoped>
-.custom-list-item:hover .v-icon{
-  color: #508ff4 !important;
-}
-.custom-list-item:focus ,.custom-list-item:hover{
+<style>
+.custom-list-item-active{
+  background: #eaf2ff !important;
   border-radius: 30px !important;
-  background-color: #eaf2ff !important;
-  color: #508ff4 !important;
+  opacity: 1 !important;
+}
+.v-ripple__container{
+  background: transparent !important;
+  display: none !important;
+}
+.custom-list-item .v-list-item--link::before{
+  background: white !important;
+  text-decoration: none !important;
 }
 .custom-item-exit{
   position: absolute;

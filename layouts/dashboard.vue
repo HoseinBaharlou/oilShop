@@ -33,7 +33,7 @@
           <v-list dense class="px-5">
             <v-list-item class="custom-avatar-panel white">
               <v-list-item-avatar>
-                <v-img src="icons/Profile image.svg" />
+                <v-img src="icons/Profile_image.svg" />
               </v-list-item-avatar>
 
               <v-list-item-title>احسان مهدوی</v-list-item-title>
@@ -53,7 +53,9 @@
       <!-- end navigation mobile and desktop -->
       <!-- start render page -->
         <v-col md="9" cols="12">
-          <Nuxt />
+          <transition name="test" mode="out-in">
+            <Nuxt />
+          </transition>
         </v-col>
       <!-- end render page -->
       </v-row>
@@ -70,6 +72,10 @@ import Vlist from '../components/partials/vlist.vue';
 import Notification from '../components/partials/dashboard/notification.vue'
 export default{
   components:{Vlist,Notification},
+  transition: {
+    name: 'test',
+    mode: 'out-in'
+  },
   data:()=>{
     return {
       drawer:false,

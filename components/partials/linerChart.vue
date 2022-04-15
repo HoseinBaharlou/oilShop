@@ -93,11 +93,6 @@ export default {
     },
   }
 },
-methods:{
-  Test(event){
-    console.log(event)
-  }
-}
 }
 </script>
 
