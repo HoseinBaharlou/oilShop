@@ -35,3 +35,28 @@
     border-radius: 20px !important;
   }
 }
+
+// start custom checkbox
+.custom-checkbox{
+  appearance: unset;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid #e3e9ef;
+  position: relative;
+}
+.custom-checkbox{
+  cursor: pointer;
+}
+.custom-checkbox:checked::after{
+  content: " ";
+  background-color: #fff;
+  position: absolute;
+  width: 24px;
+  border-radius: 8px;
+  border: 8px solid #508ff4;
+  top: -1px;
+  right: -1px;
+  height: 24px;
+}
