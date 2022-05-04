@@ -30,7 +30,7 @@
 </template>
 <script>
 import oilBalance from '../../components/partials/dashboard/oilBalance.vue'
-import candlestick from '../../components/partials/candlestick.vue'
+import candlestick from '../../components/partials/dashboard/candlestick.vue'
 export default {
   setup() {
     

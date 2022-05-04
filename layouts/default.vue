@@ -1,3 +1,29 @@
 <template>
-  
+  <v-app>
+    <!-- start navbar -->
+    <NavBar/>
+    <!-- end navbar -->
+    <!-- start header -->
+    <Header class="mt-21"/>
+    <!-- end header -->
+
+    <!--start render page -->
+    <nuxt/>
+    <!-- end render page -->
+
+    <!-- start footer -->
+    <!-- end footer -->
+  </v-app>
 </template>
+
+<script>
+import Header from '../components/partials/index/header.vue'
+import NavBar from '../components/common/navbar.vue'
+// import Footer from '../components/common/footer.vue'
+export default {
+  setup() {
+    
+  },
+  components:{Header,NavBar}
+}
+</script>

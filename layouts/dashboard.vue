@@ -44,7 +44,7 @@
             </v-list-item>
           </v-list>
           <!-- end avatar item -->
-          <hr class="custom-line-avatar-panel">
+          <v-divider class="mx-7"></v-divider>
           <!-- start items -->
           <Vlist class="pb-15"/>
           <!-- end items -->
@@ -68,7 +68,7 @@
   
 </style>
 <script>
-import Vlist from '../components/partials/vlist.vue';
+import Vlist from '../components/partials/dashboard/vlist.vue';
 import Notification from '../components/partials/dashboard/notification.vue'
 export default{
   components:{Vlist,Notification},

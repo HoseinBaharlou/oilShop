@@ -1,5 +1,6 @@
 @import '_color.scss';
 @import '_margin.scss';
+@import '_typography.scss';
 // width
 @for $i from 1 to 11 {
   .w-#{$i*10}{
@@ -59,4 +60,13 @@
   top: -1px;
   right: -1px;
   height: 24px;
+}
+
+// start style to alert 
+.custom-icon-color-alert .v-icon{
+  color: white !important;
+}
+.custom-icon-color-alert .v-btn{
+  position: absolute !important;
+  right: 0;
 }

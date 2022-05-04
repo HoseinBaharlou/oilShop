@@ -84,7 +84,7 @@
             <!--start not read line -->
             <v-col cols="12" class="d-flex align-center">
               <span>نخوانده</span>
-              <hr class="w-100 grey lighten-4 mx-1">
+              <v-divider></v-divider>
             </v-col>
             <!--start not read line -->
 

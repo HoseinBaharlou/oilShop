@@ -1,0 +1,24 @@
+// md font size
+@for $i from 25 to 50 {
+    @media only screen and (min-width:960px) {
+        .font-size-md-#{$i}{
+            font-size: $i+px !important;
+        }
+    }
+}
+
+// sm font sizw
+@for $i from 8 to 30{
+    @media only screen and (max-width:960px) {
+        .font-size-sm-#{$i}{
+            font-size: $i+px !important;
+        }
+    }
+}
+
+// default font sizw
+@for $i from 8 to 50{
+    .font-size-#{$i}{
+        font-size: $i+px !important;
+    }
+}

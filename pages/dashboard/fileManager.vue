@@ -7,7 +7,7 @@
   </v-card-title>
   <!-- end cards -->
 
-  <hr class="mx-4 custom-line-avatar-panel">
+  <v-divider></v-divider>
 
   <v-card-actions>
     <v-row class="overflow-x-auto mt-1">

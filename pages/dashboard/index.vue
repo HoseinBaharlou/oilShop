@@ -3,11 +3,13 @@
     <!-- start chart -->
     <v-col md="8" cols="12">
       <v-card class="rounded-xl">
-        <v-card-title class="d-flex  justify-space-between ">
+        <v-card-title class="d-flex  justify-space-between pb-2">
           <span>آمار فروش</span>
           <v-icon>mdi-information-outline</v-icon>
         </v-card-title>
-        <hr class="custom-line-avatar-panel">
+
+        <v-divider class="mx-5"></v-divider>
+
         <v-card-actions>
           <!-- start chart -->
           <linerChart/>
@@ -20,12 +22,14 @@
     <!-- start date -->
     <v-col md="4" cols="12">
       <v-card class="rounded-xl">
-
-        <v-card-title class="justify-space-between">
+        <!-- start title -->
+        <v-card-title class="justify-space-between pb-2">
           <span>تقویم</span>
           <v-icon>mdi-information-outline</v-icon>
         </v-card-title>
-        <hr class="custom-line-avatar-panel">
+        <!-- end title -->
+        <v-divider class="mx-4"></v-divider>
+
         <v-card-actions class="pb-3">
           <!-- start picker -->
           <v-date-picker locale="fa-IR" v-model="picker" full-width class="custom-picker"></v-date-picker>
@@ -49,7 +53,7 @@
   </v-row>
 </template>
 <script>
-import linerChart from '../../components/partials/linerChart.vue'
+import linerChart from '../../components/partials/dashboard/linerChart.vue'
 import Trafic from '../../components/partials/dashboard/Trafic.vue'
 export default {
   setup() {

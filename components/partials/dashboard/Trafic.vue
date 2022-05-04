@@ -1,10 +1,14 @@
 <template>
   <v-card class="rounded-xl">
+    <!-- start title -->
     <v-card-title class="justify-space-between pb-0">
       <span>ترافیک</span>
       <v-icon>mdi-information-outline</v-icon>
     </v-card-title>
-    <hr class="custom-line-avatar-panel">
+    <!-- end title -->
+
+    <v-divider class="mx-5"></v-divider>
+    
     <!-- start liner progress -->
     <v-card-actions class="px-5 pb-6">
       <v-row>

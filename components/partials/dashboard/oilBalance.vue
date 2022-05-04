@@ -7,7 +7,7 @@
     <!-- end title -->
 
     <!-- start actions -->
-    <hr class="custom-line-avatar-panel">
+    <v-divider class="mx-4"></v-divider>
     <v-card-actions class="d-block">
       <span class="grey--text">مجموع:</span>
       <h1 class="text-center">84.564610</h1>

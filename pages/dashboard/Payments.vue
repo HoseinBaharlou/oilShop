@@ -9,7 +9,7 @@
         </v-card-title>
         <!-- end title -->
 
-        <hr class="mx-4 grey lighten-3">
+        <v-divider></v-divider>
         <!-- start content -->
         <v-card-actions class="mt-5">
           <v-row class="overflow-x-auto">

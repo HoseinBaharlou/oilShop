@@ -1,9 +1,17 @@
 .mt-180{
   margin-top: 180px;
 }
-
+.mr-20{
+  margin-right:80px !important ;
+}
 @media only screen and (min-width:960px){
   .mb-md-180{
     margin-bottom: 180px;
+  }
+}
+
+@for $i from 17 to 25 {
+  .mt-#{$i}{
+    margin-top: $i*4+px;
   }
 }
