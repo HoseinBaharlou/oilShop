@@ -6,12 +6,11 @@
         <v-col cols="11" offset="1">
           <!-- start title -->
           <div>
-            <h1 class="purple-text font-size-md-41">امین پالایش ایساتیس</h1>
-            <hr class="custom-line">
+            <h1 class="purple-text font-size-md-41 font-size-sm-25 custom-border-bottom d-inline">امین پالایش ایساتیس</h1>
           </div>
           <!-- end title -->
           <!-- start item -->
-          <div class="purple-text font-size-25 items mr-3 mt-7">
+          <div class="purple-text font-size-md-25 font-size-sm-20 items mr-3 mt-7">
             <v-badge color="purple" left  offset-y="23" class="my-4">
               <span class="mx-5">تولیدکننده انواع قیر</span>
             </v-badge>
@@ -43,11 +42,9 @@
   flex-direction: column;
 }
 
-.custom-line{
-  background: #752585;
-  height: 6px;
-  border: solid #752585;
-  border-radius: 50px;
-  width: 370px;
+.custom-border-bottom{
+  padding-bottom: 11px;
+  border-bottom: 6px solid #752585;
+  border-radius: 6px;
 }
 </style>
