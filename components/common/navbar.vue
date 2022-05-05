@@ -1,5 +1,6 @@
 <template>
     <section>
+      <!-- start app bar -->
         <v-app-bar height="86" absolute elevation="0">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-block d-md-none"></v-app-bar-nav-icon>
             <!-- start links -->
