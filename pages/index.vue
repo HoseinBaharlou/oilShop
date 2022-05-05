@@ -9,16 +9,21 @@
     <!-- start product -->
     <product class="mt-24"/>
     <!-- end product -->
+
+    <!-- start consultant -->
+    <consultant/>
+    <!-- end consultant -->
   </section>
 </template>
 
 <script>
 import advantage from '../components/partials/index/advantage.vue'
 import product from '../components/partials/index/product.vue'
+import consultant from '../components/partials/index/consultant.vue'
 export default{
   setup() {
     
   },
-  components:{advantage,product}
+  components:{advantage,product,consultant}
 }
 </script>

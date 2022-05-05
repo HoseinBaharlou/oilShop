@@ -9,7 +9,7 @@
         <!-- end title and description -->
 
         <!-- start advantage -->
-        <article>
+        <article class="mt-17">
             <v-row class="mt-17">
                 <!-- start title and description -->
                 <v-col md="6" cols="12">
@@ -24,7 +24,7 @@
                     </p>
 
                     <div class="d-flex justify-end">
-                        <v-btn color="purple darken-2" class="white--text px-8 rounded-xl font-size-14" elevation="0">مقالات</v-btn>
+                        <v-btn color="purple darken-2" class="white--text px-15 rounded-xl font-size-14" large elevation="0">مقالات</v-btn>
                     </div>
                 </v-col>
                 <!-- end title and description -->
@@ -37,7 +37,7 @@
             </v-row>
         </article>
 
-        <article>
+        <article class="mt-21">
             <v-row class="mt-17 align-center">
                 <!-- start image -->
                 <v-col cols="6" class="d-none d-md-flex justify-center">
@@ -58,14 +58,14 @@
                     </p>
 
                     <div class="d-flex justify-end">
-                        <v-btn color="purple darken-2" class="white--text px-8 rounded-xl font-size-14" elevation="0">مقالات</v-btn>
+                        <v-btn color="purple darken-2" class="white--text px-15 rounded-xl font-size-14" large elevation="0">مقالات</v-btn>
                     </div>
                 </v-col>
                 <!-- end title and description -->
             </v-row>
         </article>
 
-        <article>
+        <article class="mt-21">
             <v-row class="mt-17">
                 <!-- start title and description -->
                 <v-col md="6" cols="12">
@@ -80,7 +80,7 @@
                     </p>
 
                     <div class="d-flex justify-end">
-                        <v-btn color="purple darken-2" class="white--text px-8 rounded-xl font-size-14" elevation="0">مقالات</v-btn>
+                        <v-btn color="purple darken-2" class="white--text px-15 rounded-xl font-size-14" large elevation="0">مقالات</v-btn>
                     </div>
                 </v-col>
                 <!-- end title and description -->

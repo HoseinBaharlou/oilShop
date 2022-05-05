@@ -25,7 +25,7 @@
         <!-- end tab -->
 
         <!-- start items -->
-        <v-tabs-items v-model="tab" class="mt-16 mb-16" style="height:500px">
+        <v-tabs-items v-model="tab" class="mt-16 mb-16">
             <v-tab-item value="tab-1">
                 <v-container fluid>
                     <v-row>
