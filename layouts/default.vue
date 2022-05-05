@@ -1,18 +1,20 @@
 <template>
   <v-app>
-    <!-- start navbar -->
-    <NavBar/>
-    <!-- end navbar -->
-    <!-- start header -->
-    <Header class="mt-21"/>
-    <!-- end header -->
+    <v-main>
+        <!-- start navbar -->
+        <NavBar/>
+        <!-- end navbar -->
+        <!-- start header -->
+        <Header class="mt-21"/>
+        <!-- end header -->
 
-    <!--start render page -->
-    <nuxt/>
-    <!-- end render page -->
+        <!--start render page -->
+        <nuxt/>
+        <!-- end render page -->
 
-    <!-- start footer -->
-    <!-- end footer -->
+        <!-- start footer -->
+        <!-- end footer -->
+    </v-main>
   </v-app>
 </template>
 
