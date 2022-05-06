@@ -23,7 +23,7 @@
       <!-- end app bar -->
       
       <!-- start navbar mobile -->
-      <v-navigation-drawer
+      <!-- <v-navigation-drawer
     v-model="drawer"
     class="navigation-drawer"
     right
@@ -51,7 +51,7 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
-      </v-navigation-drawer>
+      </v-navigation-drawer> -->
       <!-- end navbar mobile -->
     </section>
 </template>

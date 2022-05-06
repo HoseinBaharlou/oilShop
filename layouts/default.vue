@@ -4,9 +4,6 @@
         <!-- start navbar -->
         <NavBar/>
         <!-- end navbar -->
-        <!-- start header -->
-        <Header class="mt-21"/>
-        <!-- end header -->
 
         <!--start render page -->
         <nuxt/>

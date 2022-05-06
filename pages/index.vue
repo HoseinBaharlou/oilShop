@@ -39,6 +39,7 @@ export default{
   setup() {
     
   },
+  layout:'home',
   components:{advantage,product,consultant,ExpertComments,TellMe,notification}
 }
 </script>

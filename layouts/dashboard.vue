@@ -46,7 +46,82 @@
           <!-- end avatar item -->
           <v-divider class="mx-7"></v-divider>
           <!-- start items -->
-          <Vlist class="pb-15"/>
+          <v-list rounded>
+            <v-list-item-group
+              color="primary"
+            >
+              <v-list-item to="/dashboard/main">
+                <!-- start icon -->
+                <v-list-item-icon class="ml-2 my-3">
+                  <v-icon class="custom-color-icon">mdi-view-dashboard-outline</v-icon>
+                </v-list-item-icon>
+                <!-- end icon -->
+
+                <!-- start title -->
+                <v-list-item-content>
+                  <v-list-item-title>داشبرد</v-list-item-title>
+                </v-list-item-content>
+                <!-- end title -->
+              </v-list-item>
+
+              <v-list-item to="/dashboard/Tradeview">
+              <!-- start icon -->
+              <v-list-item-icon class="ml-2 my-3">
+                <v-icon class="custom-color-icon">mdi-tune-vertical</v-icon>
+              </v-list-item-icon>
+              <!-- end icon -->
+
+              <!-- start title -->
+              <v-list-item-content>
+                <v-list-item-title>نمای تجاری</v-list-item-title>
+              </v-list-item-content>
+              <!-- end title -->
+              </v-list-item>
+
+              <v-list-item to="/dashboard/fileManager">
+                <!-- start icon -->
+                <v-list-item-icon class="ml-2 my-3">
+                  <v-icon class="custom-color-icon">mdi-file-outline</v-icon>
+                </v-list-item-icon>
+                <!-- end icon -->
+
+                <!-- start title -->
+                <v-list-item-content>
+                  <v-list-item-title>مدیریت فایل</v-list-item-title>
+                </v-list-item-content>
+                <!-- end title -->
+              </v-list-item>
+
+              <v-list-item to="/dashboard/calendar">
+                <!-- start icon -->
+                <v-list-item-icon class="ml-2 my-3">
+                  <v-icon class="custom-color-icon">mdi-calendar-range</v-icon>
+                </v-list-item-icon>
+                <!-- end icon -->
+
+                <!-- start title -->
+                <v-list-item-content>
+                  <v-list-item-title>تقویم</v-list-item-title>
+                </v-list-item-content>
+                <!-- end title -->
+              </v-list-item>
+
+              <v-list-item to="/dashboard/Message">
+                <!-- start icon -->
+                <v-list-item-icon class="ml-2 my-3">
+                  <v-icon class="custom-color-icon">mdi-message-processing</v-icon>
+                </v-list-item-icon>
+                <!-- end icon -->
+
+                <!-- start title -->
+                <v-list-item-content>
+                  <v-list-item-title>پیام ها</v-list-item-title>
+                </v-list-item-content>
+                <!-- end title -->
+              </v-list-item>
+              
+            </v-list-item-group>
+          </v-list>
           <!-- end items -->
           </v-navigation-drawer>
         </v-col>
