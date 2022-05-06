@@ -17,6 +17,14 @@
     <!-- start Expert Comments -->
     <expert-comments class="mt-160"/>
     <!-- end Expert Comments -->
+
+    <!-- start tell me -->
+    <tell-me class="mt-16"/>
+    <!-- end tell me -->
+
+    <!-- start notification -->
+    <notification class="mt-24"/>
+    <!-- end notification -->
   </section>
 </template>
 
@@ -25,10 +33,12 @@ import advantage from '../components/partials/index/advantage.vue'
 import product from '../components/partials/index/product.vue'
 import consultant from '../components/partials/index/consultant.vue'
 import ExpertComments from '../components/partials/index/Expert_Comments.vue'
+import TellMe from '../components/partials/index/tell_me.vue'
+import notification from '../components/partials/index/notification.vue'
 export default{
   setup() {
     
   },
-  components:{advantage,product,consultant,ExpertComments}
+  components:{advantage,product,consultant,ExpertComments,TellMe,notification}
 }
 </script>
