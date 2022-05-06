@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-container fluid>
         <!-- start title and descripion -->
         <v-container class="mb-10"> 
             <h1 class="font-size-md-36 font-size-sm-30 text-center">مشاوره برای خرید</h1>
@@ -31,30 +31,29 @@
             <v-col md="8" cols="12">
                 <VueSlickCarousel v-bind="settings" ref="carousel">
                     <picture class="px-5">
-                        <v-img src="image/2.svg" lazy-src="image/2.svg" />
+                        <v-img src="image/2.svg"/>
                     </picture>
-
                     <picture class="px-5">
-                        <v-img src="image/2.svg" lazy-src="image/2.svg" />
+                        <v-img src="image/2.svg"/>
                     </picture>
-
                     <picture class="px-5">
-                        <v-img src="image/2.svg" lazy-src="image/2.svg" />
+                        <v-img src="image/2.svg"/>
                     </picture>
-
                     <picture class="px-5">
-                        <v-img src="image/2.svg" lazy-src="image/2.svg" />
+                        <v-img src="image/2.svg"/>
                     </picture>
-
                     <picture class="px-5">
-                        <v-img src="image/2.svg" lazy-src="image/2.svg" />
+                        <v-img src="image/2.svg"/>
+                    </picture>
+                    <picture class="px-5">
+                        <v-img src="image/2.svg"/>
                     </picture>
                 </VueSlickCarousel>
             </v-col>
             <!-- end carousel -->
         </v-row>
         <!-- end carousel -->
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -67,13 +66,39 @@ export default {
     data:()=>{
         return {
             settings:{
-                "dots": true,
+                "dots": false,
                 "infinite": true,
-                "centerMode": true,
-                "centerPadding": "20px",
-                "slidesToShow": 1,
-                "slidesToScroll": 1,
-                "variableWidth": true
+                "arrows":false,
+                "speed": 500,
+                "slidesToShow": 3,
+                "slidesToScroll": 3,
+                "initialSlide": 0,
+                "responsive": [
+                    {
+                    "breakpoint": 1024,
+                    "settings": {
+                        "slidesToShow": 3,
+                        "slidesToScroll": 3,
+                        "infinite": true,
+                        "dots": true
+                    }
+                    },
+                    {
+                    "breakpoint": 600,
+                    "settings": {
+                        "slidesToShow": 2,
+                        "slidesToScroll": 2,
+                        "initialSlide": 2
+                    }
+                    },
+                    {
+                    "breakpoint": 480,
+                    "settings": {
+                        "slidesToShow": 1,
+                        "slidesToScroll": 1
+                    }
+                    }
+                ]
             }
         }
     },
