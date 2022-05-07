@@ -13,7 +13,7 @@
         <!-- end render page -->
 
         <!-- start footer -->
-        <Footer/>
+        <Footer class="mt-180"/>
         <!-- end footer -->
     </v-main>
   </v-app>
