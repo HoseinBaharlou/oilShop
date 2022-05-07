@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import navbarPreview from '../components/partials/dashboard/navbarPreview.vue';
-import underMenu from '../components/partials/dashboard/underMenu.vue'
+import navbarPreview from '../../components/partials/dashboard/navbarPreview.vue';
+import underMenu from '../../components/partials/dashboard/underMenu.vue'
 export default {
   setup() {
     

@@ -5,14 +5,14 @@
           <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-block d-md-none"></v-app-bar-nav-icon>
           <!-- start links -->
           <div class="d-none d-md-block">
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">صفحه اصلی</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">محصولات</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">مقالات</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">خبرنامه</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">تماس با ما</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">درباره ما</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">ارسال آنالیز</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4">گالری تصاویر</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">صفحه اصلی</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">محصولات</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">مقالات</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">خبرنامه</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">تماس با ما</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">درباره ما</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">ارسال آنالیز</nuxt-link>
+              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">گالری تصاویر</nuxt-link>
           </div>
           <v-spacer></v-spacer>
           <div class="orange rounded-xl d-flex align-center custom-search-box justify-end">
@@ -23,48 +23,82 @@
       <!-- end app bar -->
       
       <!-- start navbar mobile -->
-      <!-- <v-navigation-drawer
+        <v-navigation-drawer
     v-model="drawer"
-    class="navigation-drawer"
+    :app='app'
+    :absolute='absolute'
     right
-    absolute
-    width="250"
+    
   >
-    <v-list>
+    <v-list
+      nav
+      width="250"
+      dense
+    >
       <v-list-item-group
+        v-model="group"
         active-class="deep-purple--text text--accent-4"
       >
         <v-list-item>
-          <v-list-item-title>Foo</v-list-item-title>
+          <v-list-item-title>صفحه اصلی</v-list-item-title>
         </v-list-item>
 
         <v-list-item>
-          <v-list-item-title>Bar</v-list-item-title>
+          <v-list-item-title>محصولات</v-list-item-title>
         </v-list-item>
 
         <v-list-item>
-          <v-list-item-title>Fizz</v-list-item-title>
+          <v-list-item-title>مقالات</v-list-item-title>
         </v-list-item>
 
         <v-list-item>
-          <v-list-item-title>Buzz</v-list-item-title>
+          <v-list-item-title>خبرنامه</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>تماس با ما</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>درباره ما</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>ارسال آنالیز</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>گالری تصاویر</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
-      </v-navigation-drawer> -->
-      <!-- end navbar mobile -->
+        </v-navigation-drawer>
     </section>
 </template>
 <script>
 export default {
-    setup() {
-        
-    },
-    data:()=>{
-        return{
-            drawer:false
-        }
+  setup() {
+      
+  },
+  data:()=>{
+      return{
+          drawer:false,
+          group:'null',
+          app:false,
+          absolute:null
+      }
+  },
+  created: function () {
+    if(process.client){
+      if(window.innerWidth < 960){
+        this.absolute = false
+        this.app = true
+      }else{
+        this.absolute = true
+        this.app = false
+      }
     }
+  }
 }
 </script>
 
@@ -98,8 +132,26 @@ export default {
       }
     }
 }
-.navigation-drawer{
-    width: 240px !important;
+.custom-nuxt-link{
+  position: relative;
+  &::after{
+    transition:all 0.5s ease;
+    content: " ";
+    width: 0%;
+    height: 2px;
+    background: #752585;
+    position: absolute;
+    bottom: 0px;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+  &:hover{
+    &::after{
+      width: 100%;
+    }
+  }
 }
+
 
 </style>

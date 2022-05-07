@@ -26,7 +26,7 @@
 
 </template>
 <script>
-import Table from '../components/partials/dashboard/table_file.vue'
+import Table from '../../components/partials/dashboard/table_file.vue'
 export default {
   setup() {
     

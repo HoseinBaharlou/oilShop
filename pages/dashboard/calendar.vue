@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import calendar from '../components/partials/dashboard/Calendar.vue'
+import calendar from '../../components/partials/dashboard/Calendar.vue'
 export default {
     layout:'dashboard',
     components:{calendar}

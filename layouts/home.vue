@@ -29,4 +29,3 @@ export default {
   components:{Header,NavBar}
 }
 </script>
-</template>

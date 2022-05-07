@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Contacts from '../components/partials/dashboard/contacts.vue'
-import Message from '../components/partials/dashboard/Message.vue'
+import Contacts from '../../components/partials/dashboard/contacts.vue'
+import Message from '../../components/partials/dashboard/Message.vue'
 export default {
   setup() {
     

@@ -29,8 +29,8 @@
   </v-row>
 </template>
 <script>
-import oilBalance from '../components/partials/dashboard/oilBalance.vue'
-import candlestick from '../components/partials/dashboard/candlestick.vue'
+import oilBalance from '../../components/partials/dashboard/oilBalance.vue'
+import candlestick from '../../components/partials/dashboard/candlestick.vue'
 export default {
   setup() {
     

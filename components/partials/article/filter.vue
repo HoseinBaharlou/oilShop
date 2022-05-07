@@ -8,7 +8,6 @@
             <v-divider></v-divider>
             <!-- start chip -->
             <v-chip-group class="mt-3"
-            v-model="neighborhoods"
             column
             multiple
             >

@@ -6,10 +6,11 @@
         <!-- end navbar -->
 
         <!--start render page -->
-        <nuxt/>
+        <nuxt class="mt-21"/>
         <!-- end render page -->
 
         <!-- start footer -->
+        <Footer/>
         <!-- end footer -->
     </v-main>
   </v-app>
@@ -18,11 +19,12 @@
 <script>
 import Header from '../components/partials/index/header.vue'
 import NavBar from '../components/common/navbar.vue'
+import Footer from '../components/common/footer.vue'
 // import Footer from '../components/common/footer.vue'
 export default {
   setup() {
     
   },
-  components:{Header,NavBar}
+  components:{Header,NavBar,Footer}
 }
 </script>
