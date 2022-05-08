@@ -1,5 +1,5 @@
 <template>
-    <VueSlickCarousel v-bind="settings" class="custom-carousel-index">
+    <VueSlickCarousel v-bind="settings" class="custom-carousel">
         <slot></slot>
     </VueSlickCarousel>
 </template>
@@ -52,25 +52,3 @@ export default {
     }
 }
 </script>
-
-<style lang='scss'>
-.custom-carousel-index{
-    .slick-dots{
-        margin-top: 40px !important;
-        position: unset !important;
-        
-        li{
-            width: 21px !important;
-            height: 21px !important;
-            border: 1px solid #752585 !important;
-            border-radius: 50px !important;
-            button::before{
-                font-size: 0 !important;
-            }
-        }
-        .slick-active{
-            background: #752585 !important;
-        }
-    }
-}
-</style>

@@ -66,3 +66,25 @@
 .dropzone{
   cursor: pointer;
 }
+
+// style to carousel
+
+.custom-carousel{
+  .slick-dots{
+      margin-top: 40px !important;
+      position: unset !important;
+      
+      li{
+          width: 21px !important;
+          height: 21px !important;
+          border: 1px solid #752585 !important;
+          border-radius: 50px !important;
+          button::before{
+              font-size: 0 !important;
+          }
+      }
+      .slick-active{
+          background: #752585 !important;
+      }
+  }
+}
