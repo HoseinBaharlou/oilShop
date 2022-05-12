@@ -88,3 +88,26 @@
       }
   }
 }
+
+// style to auth input 
+
+.input-auth{
+  height: 60px;
+  border: 2px solid #29292959;
+  input{
+      color: #00000093 !important;
+      &:focus{
+          outline: none;
+      }
+  }
+}
+.liner-vertical{
+  border: 1px solid #29292959 !important;
+}
+
+.auth-btn{
+  height: 60px !important;
+  width: 100% !important;
+  display: block !important;
+  background: #5883FB !important;
+}
