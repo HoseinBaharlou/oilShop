@@ -87,7 +87,7 @@
             <v-list-item-title>تنظیمات صفحه اصلی</v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-list-item link v-for="(item,index) in home" :key="index">
+        <v-list-item link v-for="(item,index) in home" :key="index" :to="item.link">
             <v-list-item-icon>
               <v-icon large>{{item.icon}}</v-icon>
             </v-list-item-icon>
@@ -106,13 +106,13 @@ export default {
   data:()=>{
     return {
       home:[
-        {'icon':'mdi-application-outline','title':'منو بالایی'},
-        {'icon':'mdi-alpha-h','title':'تیتر سایت و تصویر'},
-        {'icon':'mdi-store','title':'فروشگاه'},
-        {'icon':'mdi-newspaper-variant-outline','title':'خبرنامه'},
-        {'icon':'mdi-square-edit-outline','title':'مقالات'},
-        {'icon':'mdi-information-outline','title':'درباره ما'},
-        {'icon':'mdi-page-layout-footer','title':'فوتر'},
+        {'icon':'mdi-application-outline','title':'منو بالایی','link':'SettingMenu'},
+        {'icon':'mdi-alpha-h','title':'تیتر سایت و تصویر','link':'underMenu'},
+        {'icon':'mdi-store','title':'فروشگاه','link':'underMenu'},
+        {'icon':'mdi-newspaper-variant-outline','title':'خبرنامه','link':'underMenu'},
+        {'icon':'mdi-square-edit-outline','title':'مقالات','link':'underMenu'},
+        {'icon':'mdi-information-outline','title':'درباره ما','link':'underMenu'},
+        {'icon':'mdi-page-layout-footer','title':'فوتر','link':'underMenu'},
       ]
     }
   }
