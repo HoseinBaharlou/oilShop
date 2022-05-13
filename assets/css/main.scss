@@ -111,3 +111,11 @@
   display: block !important;
   background: #5883FB !important;
 }
+
+// change color badge content for article and news page comment
+
+.comment{
+  .v-badge__badge{
+      color: #000000 !important;
+  }
+}
