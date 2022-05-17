@@ -29,6 +29,6 @@ export default {
   setup() {
     
   },
-  components:{Header,NavBar,Footer}
+  components:{Header,NavBar,Footer},
 }
 </script>

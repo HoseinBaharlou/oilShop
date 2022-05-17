@@ -15,9 +15,70 @@
               <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">گالری تصاویر</nuxt-link>
           </div>
           <v-spacer></v-spacer>
-          <div class="orange rounded-xl d-flex align-center custom-search-box justify-end">
-              <input type="search" name="search" class="rounded-r-xl" placeholder="جستجو...">
-              <v-icon color="purple" class="mx-2 search-icon" large>mdi-magnify</v-icon>
+          <!-- card -->
+          <div class="mx-5">
+            <v-icon large>mdi-basket</v-icon>
+          </div>
+          <!-- logout and dashboard -->
+          <div>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon v-bind="attrs"
+                v-on="on" x-large>mdi-account-circle</v-icon>
+              </template>
+              <v-list v-if="isAuthenticated">
+
+                <v-list-item @click="logout">
+                  <v-list-item-title>خروج از پنل</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/dashboard/main">
+                  <v-list-item-title>
+                    مشاهده پنل مدیریت
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+              <!-- login and register -->
+              <v-list v-if="!isAuthenticated">
+
+                <v-list-item to="/auth/login">
+                  <v-list-item-title>ورود</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/auth/register">
+                  <v-list-item-title>ثبت نام</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
+          <!-- search box -->
+          <div>
+            <v-dialog
+              transition="dialog-top-transition"
+              max-width="600"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="purple darken-2" class="mx-2 search-icon" large v-bind="attrs"
+                  v-on="on">mdi-magnify</v-icon>
+              </template>
+              <template v-slot:default="dialog">
+                <v-card>
+                  <v-toolbar
+                    color="primary"
+                    dark
+                  >جستجو در سایت</v-toolbar>
+                  <v-card-actions class="mt-5">
+                    <v-text-field label="جستجو" outlined rounded></v-text-field>
+                  </v-card-actions>
+                  <v-card-actions class="justify-end">
+                    <v-btn
+                      text
+                      @click="dialog.value = false"
+                    >بستن</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
           </div>
       </v-app-bar>
       <!-- end app bar -->
@@ -89,6 +150,10 @@ export default {
       }
   },
   created: function () {
+    // check token
+    this.$store.dispatch('initToken')
+
+    // navbar responsive
     if(process.client){
       if(window.innerWidth < 960){
         this.absolute = false
@@ -98,40 +163,23 @@ export default {
         this.app = false
       }
     }
+  },
+  // logout
+  methods:{
+    logout(){
+      this.$store.dispatch('logout')
+      this.$router.push('/')
+    },
+  },
+  computed:{
+    isAuthenticated(){
+      return this.$store.getters.isAuthenticated;
+    },
   }
 }
 </script>
 
 <style scoped lang='scss'>
-.custom-search-box{
-    width: 50px;
-    height: 50px;
-    transition: 0.5s ease;
-    input{
-        display: none;
-        width: 100%;
-        padding-right: 20px;
-        &:focus{
-            border:none !important;
-            outline: none !important;
-        }
-    }
-    .search-icon{
-        cursor: pointer;
-    }
-    &:hover{
-        width:30%;
-        justify-content: end !important;
-        input{
-            display: block;
-        }
-    }
-    @media only screen and (max-width:960px) {
-      &:hover{
-        width: 80% !important;
-      }
-    }
-}
 .custom-nuxt-link{
   position: relative;
   &::after{
@@ -152,6 +200,9 @@ export default {
     }
   }
 }
-
+.vertical-liner{
+  border: 1px solid #606060;
+  height: 25px;
+}
 
 </style>

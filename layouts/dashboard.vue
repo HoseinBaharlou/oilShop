@@ -94,10 +94,8 @@ export default{
         this.drawer = true
       }
     }
-    else{
-      
-    }
-  }
+  },
+  middleware: ['check-auth','auth']
 }
 </script>
 <style>
