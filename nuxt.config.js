@@ -2,10 +2,6 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  server: {     
-    port: 3000, // default: 3000     
-    host: '0.0.0.0', // default: localhost   
-  },
   head: {
     titleTemplate: '%s - oilApp',
     title: 'oilApp',
@@ -32,7 +28,8 @@ export default {
   plugins: [
     {src : '~/plugins/vue-apexchart.js', ssr : false},
     {src : '~/plugins/vue2-google-maps.js', ssr : false},
-    {src : '~/plugins/dropzone.js', ssr : false}
+    {src : '~/plugins/dropzone.js', ssr : false},
+    {src : '~/plugins/Vselect.js', ssr : false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,15 +45,13 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'nuxt-sweetalert2',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    '@nuxtjs/auth-next',
   ],
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api', 
-    Headers:{
-      Accept:'application/json'
-    }
+    baseURL: 'http://127.0.0.1:8000/api',
+    withCredentials:true
   },
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

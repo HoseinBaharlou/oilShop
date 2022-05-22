@@ -11,11 +11,11 @@
             <!-- form -->
             <form action="" method="post" @submit.prevent="submit">
                 <div class="input-auth d-flex align-center multi-inputs my-4 py-2">
-                    <input type="email" class="text-center w-50" placeholder="ایمیل" v-model="email" maxlength="100">
+                    <input type="email" class="text-center w-50" placeholder="ایمیل" v-model="form.email" maxlength="100">
                     <v-divider vertical class="liner-vertical"></v-divider>
-                    <input type="password" class="text-center w-50" placeholder="رمز عبور" v-model="password" maxlength="100">
+                    <input type="password" class="text-center w-50" placeholder="رمز عبور" v-model="form.password" maxlength="100">
                 </div>
-                
+
                 <div>
                     <input type="submit" value="ورود" class="auth-btn white--text">
                 </div>
@@ -31,16 +31,15 @@ export default {
     components:{alert},
     data(){
         return{
-            email:'',
-            password:''
+            form:{
+              email:'',
+              password:''
+            }
         }
     },
     methods:{
         submit(){
-            this.$store.dispatch('login',{
-                email:this.email,
-                password:this.password
-            })
+            this.$store.dispatch('login',this.form);
         }
     }
 }

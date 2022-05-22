@@ -12,15 +12,14 @@
 <script>
 import NavBar from '../components/common/navbar.vue'
 export default {
-    setup() {
-        
-    },
-    components:{NavBar},
-    middleware({store,redirect}){
-        store.dispatch('initToken')
-        if(store.getters.isAuthenticated){
-        //    return redirect('/dashboard/main') 
-        }
+  setup() {
+
+  },
+  components:{NavBar},
+  beforeCreate() {
+    if (this.$store.getters.isAuthenticated){
+      this.$router.push('/dashboard/main');
     }
+  }
 }
 </script>

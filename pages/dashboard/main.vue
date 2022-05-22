@@ -38,7 +38,7 @@
       </v-card>
     </v-col>
     <!-- end date -->
-    
+
     <!-- start trafic -->
     <v-col>
       <v-row>
@@ -57,7 +57,7 @@ import linerChart from '../../components/partials/dashboard/linerChart.vue'
 import Trafic from '../../components/partials/dashboard/Trafic.vue'
 export default {
   setup() {
-    
+
   },
   data:()=>{
     return{

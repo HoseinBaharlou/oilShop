@@ -9,12 +9,18 @@ export default ()=>{
       access_token:null,
       expires_in:null,
       token_type:null,
-      verify:true
+      verify:true,
+      options: [ //option category
+        {
+          'label':'گروه اصلی',
+          'id':0
+        }
+      ],
     },
     mutations:{
       // register
       REGISTER(state,Credentials){
-        if(Credentials.email){ 
+        if(Credentials.email){
           this.$cookies.set('email',Credentials.email,{
             path:'/',
             maxAge:60*60*2
@@ -33,8 +39,8 @@ export default ()=>{
 
       // login
       SET_TOKEN(state,Credentials){
-        if(typeof Credentials.verify !== undefined && !Credentials.verify){
-          console.log(Credentials.access_token)
+        console.log(Credentials.verify);
+        if(typeof Credentials.verify != undefined && !Credentials.verify && !Credentials.errors){
           const options = {
             path: '/',
             maxAge: 60*60*2
@@ -53,6 +59,7 @@ export default ()=>{
             path:'/',
             maxAge:356*24*60*60
           })
+
           this.$router.push('/dashboard/main')
         }else{
           state.errors = Credentials.errors
@@ -65,7 +72,7 @@ export default ()=>{
         }
       },
       CHECKTOKEN(state,token){
-        state.access_token = token
+        state.access_token = token.access_token
       },
       // verify
       VERIFY(state,status){
@@ -80,21 +87,38 @@ export default ()=>{
       async OTPAUTH(state,Credentials){
         if(Credentials.success){
           const token = await this.$cookies.get('Disposable_token')
-          await this.$cookies.set('token',token,{
-            path:'/',
-            maxAge:356*24*60*60
-          })
-          // remove email and Disposable_token coockies
-          await this.$cookies.remove('Disposable_token')
-          await this.$cookies.remove('email')
-          await this.$router.push('/dashboard/main')
+          console.log(Credentials.success)
+          if (token){
+            await this.$cookies.set('token',token,{
+              path:'/',
+              maxAge:356*24*60*60
+            })
+            // remove email and Disposable_token coockies
+            await this.$cookies.remove('Disposable_token')
+            await this.$cookies.remove('email')
+            await this.$router.push('/dashboard/main')
+          }else {
+            await this.$router.push('/auth/login')
+          }
         }else{
+          console.log(Credentials.errors)
           state.errors = Credentials.error
           state.status = Credentials.state
           setTimeout(() => {
             state.errors = null
             state.status = null
           }, 10000);
+        }
+      },
+      // category
+      CATEGORY(state,content){
+        if (content.success){
+          state.success = content.success
+          this.$axios.get('/category').then(function (res){
+            state.options = res.data.category
+          })
+        }else {
+          state.errors = content.errors
         }
       }
     },
@@ -106,15 +130,13 @@ export default ()=>{
         }).catch((er)=>{
           context.commit('REGISTER',{errors:er.response.data.errors,status:er.response.status})
         })
-        
       },
       // login user
       async login(context,Credentials){
         // axios
         this.$axios.$post('auth/login',Credentials).then(function(res){
-          context.commit('SET_TOKEN',{access_token:res.access_token,verify:res.verify_email,email:Credentials.email})
+          context.commit('SET_TOKEN',{access_token:res.access_token,verify:res.verify,email:Credentials.email})
         }).catch(function(er){
-          console.log(er.response.data)
           context.commit('SET_TOKEN',{errors:er.response.data.errors,status:er.response.status})
         })
       },
@@ -134,16 +156,16 @@ export default ()=>{
       async initToken(context){
         const token = this.$cookies.get('token')
         if(!token){
-          return
+          this.$router.push('/auth/login');
+        }else {
+          await context.commit('CHECKTOKEN', {access_token: token})
         }
-        await context.commit('CHECKTOKEN',{access_token:token})
       },
       // check verify email
       async initOtp(context){
         const email = this.$cookies.get('email')
         let verify = true
         if(email){
-          
           verify = false
         }
         await context.commit('VERIFY',{'verify':verify})
@@ -153,9 +175,21 @@ export default ()=>{
         this.$axios.$post('auth/otp',Credentials).then(function(res){
           commit('OTPAUTH',{success:res.success})
         }).catch(function(er){
-          console.log(er.response.data)
           commit('OTPAUTH',{errors:er.response.data.errors,status:er.response.status})
         })
+      },
+    //  category
+      async category({commit},category){
+        // send category
+        this.$axios.post('/category',{'title':category.title,'parent_id':category.parent_id}).then(
+          function (response){
+            commit('CATEGORY',{'success':response.data.success})
+          }
+        ).catch(
+          function (er){
+            commit('CATEGORY',{'errors':er.response.data.errors})
+          }
+        );
       }
     },
     getters:{
@@ -174,6 +208,10 @@ export default ()=>{
       },
       isVerifiedEmail(state){
         return Boolean(state.verify)
+      },
+      category(state){
+
+        return state.menu
       }
     },
   })
