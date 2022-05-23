@@ -82,14 +82,14 @@
           </div>
       </v-app-bar>
       <!-- end app bar -->
-      
+
       <!-- start navbar mobile -->
         <v-navigation-drawer
     v-model="drawer"
     :app='app'
     :absolute='absolute'
     right
-    
+
   >
     <v-list
       nav
@@ -139,7 +139,7 @@
 <script>
 export default {
   setup() {
-      
+
   },
   data:()=>{
       return{
@@ -150,9 +150,6 @@ export default {
       }
   },
   created: function () {
-    // check token
-    this.$store.dispatch('initToken')
-
     // navbar responsive
     if(process.client){
       if(window.innerWidth < 960){

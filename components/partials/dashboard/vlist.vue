@@ -73,7 +73,7 @@
         </v-list-item-content>
         <!-- end title -->
       </v-list-item>
-      
+
     </v-list-item-group>
   </v-list>
 
@@ -101,16 +101,16 @@
 
 export default {
   setup() {
-    
+
   },
   data:()=>{
     return {
       home:[
         {'icon':'mdi-application-outline','title':'منو بالایی','link':'SettingMenu'},
         {'icon':'mdi-alpha-h','title':'تیتر سایت و تصویر','link':'underMenu'},
-        {'icon':'mdi-store','title':'فروشگاه','link':'underMenu'},
+        {'icon':'mdi-store','title':'فروشگاه','link':'article'},
         {'icon':'mdi-newspaper-variant-outline','title':'خبرنامه','link':'underMenu'},
-        {'icon':'mdi-square-edit-outline','title':'مقالات','link':'underMenu'},
+        {'icon':'mdi-square-edit-outline','title':'مقالات','link':'article'},
         {'icon':'mdi-information-outline','title':'درباره ما','link':'underMenu'},
         {'icon':'mdi-page-layout-footer','title':'فوتر','link':'underMenu'},
       ]

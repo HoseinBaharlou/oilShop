@@ -16,10 +16,5 @@ export default {
 
   },
   components:{NavBar},
-  beforeCreate() {
-    if (this.$store.getters.isAuthenticated){
-      this.$router.push('/dashboard/main');
-    }
-  }
 }
 </script>
