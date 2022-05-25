@@ -107,7 +107,7 @@ export default {
     return {
       home:[
         {'icon':'mdi-application-outline','title':'منو بالایی','link':'SettingMenu'},
-        {'icon':'mdi-alpha-h','title':'تیتر سایت و تصویر','link':'underMenu'},
+        {'icon':'mdi-alpha-h','title':'تیتر سایت و تصویر','link':'mainHeader'},
         {'icon':'mdi-store','title':'فروشگاه','link':'article'},
         {'icon':'mdi-newspaper-variant-outline','title':'خبرنامه','link':'underMenu'},
         {'icon':'mdi-square-edit-outline','title':'مقالات','link':'article'},

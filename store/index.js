@@ -1,8 +1,10 @@
 import Vuex from 'vuex'
 import article from './modules/article'
+import common from './modules/common'
 export default ()=>{
   return  new Vuex.Store({
     state:{
+      BackendUrl : 'http://127.0.0.1:8000/api',
       success:'',
       errors:'',
       status:'',
@@ -40,9 +42,9 @@ export default ()=>{
     },
     actions:{
       async nuxtServerInit({commit}){
-        // await this.$axios.get('/category').then(function (res){
-        //   commit('SET_CATEGORY',{'category':res.data.category})
-        // })
+        await this.$axios.get('/category').then(function (res){
+          commit('SET_CATEGORY',{'category':res.data.category})
+        })
       },
       //  category
       async category({commit},category){
@@ -71,7 +73,8 @@ export default ()=>{
       }
     },
     modules:{
-      article
+      article,
+      common,
     }
   })
 }
