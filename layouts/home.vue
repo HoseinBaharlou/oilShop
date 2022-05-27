@@ -27,7 +27,7 @@ import Footer from '../components/common/footer.vue'
 // import Footer from '../components/common/footer.vue'
 export default {
   setup() {
-    
+
   },
   components:{Header,NavBar,Footer},
 }

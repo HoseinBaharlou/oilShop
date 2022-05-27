@@ -40,7 +40,7 @@
     .article{
         border-left: 3px dashed #752585;
         border-right: 3px dashed #752585;
-    }   
+    }
 }
 
 </style>

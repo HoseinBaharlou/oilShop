@@ -26,7 +26,7 @@
                 <v-icon v-bind="attrs"
                 v-on="on" x-large>mdi-account-circle</v-icon>
               </template>
-              <v-list v-if="isAuthenticated">
+              <v-list v-if="$auth.loggedIn">
 
                 <v-list-item @click="logout">
                   <v-list-item-title>خروج از پنل</v-list-item-title>
@@ -39,7 +39,7 @@
                 </v-list-item>
               </v-list>
               <!-- login and register -->
-              <v-list v-if="!isAuthenticated">
+              <v-list v-if="!$auth.loggedIn">
 
                 <v-list-item to="/auth/login">
                   <v-list-item-title>ورود</v-list-item-title>
@@ -163,9 +163,8 @@ export default {
   },
   // logout
   methods:{
-    logout(){
-      this.$store.dispatch('logout')
-      this.$router.push('/')
+    async logout(){
+      await this.$auth.logout()
     },
   },
   computed:{

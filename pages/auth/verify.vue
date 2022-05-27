@@ -22,10 +22,10 @@
             ></v-otp-input>
         </div>
         <div class="d-flex align-center justify-center mt-5">
-            <v-btn text @click="sendCode">ارسال مجدد کد</v-btn>
+            <v-btn text @click="sendCode" :loading="sendCodeLoading">ارسال مجدد کد</v-btn>
         </div>
         <!-- btn -->
-        <input class="custom-otp white--text mt-5 custom-btn-otp" value="تایید" type="submit" @click="submit">
+        <v-btn class="custom-otp white--text mt-5 custom-btn-otp" :loading="verifyLoading" @click="submit">تایید</v-btn>
     </section>
 </template>
 <script>
@@ -34,31 +34,67 @@ import alert from '../../components/partials/alert.vue'
 export default {
     layout:'auth',
     components:{alert},
-    middleware:['check-verify','verify'],
+    middleware:['check-verify'],
     data(){
         return{
-            code:'',
+          code:'',
+          sendCodeLoading:false,
+          verifyLoading:false
         }
     },
     methods:{
         submit(){
-            if(this.code){
-                this.$store.dispatch('otp',{
-                    code:this.code,
-                    email:this.$cookies.get('email')
-                })
+          this.verifyLoading = true //loading btn
+          let data = {
+              code:this.code,
+              email:this.$cookies.get('email')
             }
+
+            this.$axios.post('/auth/otp',data).then((res)=>{
+              console.log(res)
+              this.verifyLoading = false //unload
+              //message
+              this.$swal({
+                type:'success',
+                title:'موفق',
+                text:res.data.success,
+                confirmButtonText:'باشه'
+              }).then(()=>{
+                this.$cookies.remove('email')
+                this.$router.push('/auth/login')
+              })
+            }).catch((er)=>{
+              //message
+              this.verifyLoading = false
+              this.$swal({
+                type:'error',
+                title:'خطا!',
+                text:er.response.data.errors,
+                confirmButtonText:'باشه'
+              })
+            })
         },
         async sendCode(){
-            const {success} = await this.$axios.$post('auth/sendEmailVerify',{'email':this.$cookies.get('email')})
-            if(success){
-                this.$store.state.success = success
-                setTimeout(() => {
-                    this.$store.state.success = null
-                }, 10000);
-            }
+          this.sendCodeLoading = true //loading btn
+          await this.$axios.$post('auth/sendEmailVerify',{'email':this.$cookies.get('email')}).then((res)=>{
+            this.sendCodeLoading = false //unload
+            this.$swal({
+                type:'success',
+                title:'موفق',
+                text:res.success,
+                confirmButtonText:'باشه'
+              })
+            }).catch((er)=>{
+            this.sendCodeLoading = false //unload
+            this.$swal({
+                type:'error',
+                title:'خطا!',
+                text:er.response.data.errors,
+                confirmButtonText:'باشه'
+              })
+            })
         }
-    }
+    },
 }
 </script>
 
@@ -75,7 +111,7 @@ export default {
     }
 
     .custom-btn-otp{
-        height: 60px;
+        height: 60px !important;
         margin: auto;
         display: block !important;
         background: #5883FB !important;

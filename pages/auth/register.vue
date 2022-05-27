@@ -11,40 +11,40 @@
             <!-- form -->
             <form action="" method="post" @submit.prevent="register">
                 <div class="input-auth d-flex align-center multi-inputs my-4 py-2">
-                    <input type="text" class="text-center w-50" placeholder="اسم" v-model="name" maxlength="20">
+                    <input type="text" class="text-center w-50" placeholder="اسم" v-model="form.name" maxlength="20">
                     <v-divider vertical class="liner-vertical"></v-divider>
-                    <input type="text" class="text-center w-50" placeholder="فامیل" v-model="last_name" maxlength="20">
+                    <input type="text" class="text-center w-50" placeholder="فامیل" v-model="form.last_name" maxlength="20">
                 </div>
 
                 <div class="input-auth d-flex align-center multi-inputs my-4 py-2">
-                    <input type="email" class="text-center w-50" placeholder="ایمیل" v-model="email" maxlength="100">
+                    <input type="email" class="text-center w-50" placeholder="ایمیل" v-model="form.email" maxlength="100">
                     <v-divider vertical class="liner-vertical"></v-divider>
-                    <input type="text" class="text-center w-50" placeholder="شماره تلفن" v-model="phone" maxlength="11">
+                    <input type="text" class="text-center w-50" placeholder="شماره تلفن" v-model="form.phone_number" maxlength="11">
                 </div>
 
                 <div class="input-auth d-flex align-center multi-inputs my-4 py-2">
-                    <input type="password" class="text-center w-50" placeholder="رمز عبور" v-model="password" maxlength="100">
+                    <input type="password" class="text-center w-50" placeholder="رمز عبور" v-model="form.password" maxlength="100">
                     <v-divider vertical class="liner-vertical"></v-divider>
-                    <input type="password" class="text-center w-50" placeholder="تکرار رمز عبور" v-model="password_confirmation">
+                    <input type="password" class="text-center w-50" placeholder="تکرار رمز عبور" v-model="form.password_confirmation">
                 </div>
 
                 <div class="input-auth d-flex align-center my-4">
-                    <input type="text" class="text-center w-100" placeholder="آدرس کامل" v-model="address" maxlength="200">
+                    <input type="text" class="text-center w-100" placeholder="آدرس کامل" v-model="form.address" maxlength="200">
                 </div>
 
                 <div class="input-auth d-flex align-center multi-inputs  my-4 py-2">
-                    <input type="text" class="text-center w-50" placeholder="پلاک" v-model="tag" maxlength="10">
+                    <input type="text" class="text-center w-50" placeholder="پلاک" v-model="form.tag" maxlength="10">
                     <v-divider vertical class="liner-vertical"></v-divider>
-                    <input type="text" class="text-center w-50" placeholder="کد پستی" v-model="zip_code" maxlength="10">
+                    <input type="text" class="text-center w-50" placeholder="کد پستی" v-model="form.zip_code" maxlength="10">
                 </div>
 
                 <div class="d-flex justify-start my-4 align-center">
-                    <input type="checkbox" class="checkbox-agreement mx-2" @click="agreement = !agreement"/>
+                    <input type="checkbox" class="checkbox-agreement mx-2" @click="form.agreement = !form.agreement"/>
                     <span class="mx-2">شرایط <nuxt-link to="" class="text-decoration-none">توافقنامه</nuxt-link> را میپذیرم</span>
                 </div>
 
                 <div class="my-4">
-                    <input type="submit" value="ثبت نام" class="auth-btn white--text">
+                  <v-btn class="auth-btn white--text" :loading="loading" @click="register">ثبت نام</v-btn>
                 </div>
             </form>
         </v-col>
@@ -64,38 +64,56 @@ export default {
     },
     data(){
         return{
-            name:'',
-            last_name:'',
-            email:'',
-            phone:'',
-            password:'',
-            password_confirmation:'',
-            tag:'',
-            address:'',
-            zip_code:'',
-            agreement:false,
+            loading:false,
+            form:{
+              name:'',
+              last_name:'',
+              email:'',
+              phone_number:'',
+              password:'',
+              password_confirmation:'',
+              tag:'',
+              address:'',
+              zip_code:'',
+              agreement:false,
+            }
         }
     },
     methods:{
         register(){
-            this.$store.dispatch('register',{
-                name:this.name,
-                last_name:this.last_name,
-                email:this.email,
-                phone_number:this.phone,
-                password:this.password,
-                password_confirmation:this.password_confirmation,
-                address:this.address,
-                tag:this.tag,
-                zip_code:this.zip_code,
-                agreement:this.agreement
+          //enable loading
+          this.loading = true
+          //send request for register
+          this.$axios.post('auth/register',this.form).then((res)=>{
+            this.loading = false
+            this.$cookies.set('email',this.form.email)
+            this.$swal({
+              type:'success',
+              title:'موفق',
+              text:res.data.success,
+              confirmButtonText:'باشه'
+            }).then(()=>{
+                this.$router.push('/auth/verify');
+              }
+            );
+          }).catch((er)=>{
+            this.loading = false
+            this.$swal({
+              type:'error',
+              title:'خطا!',
+              text:er.response.data.errors,
+              confirmButtonText:'باشه'
             })
+          });
 
-            if(this.$store.getters.isVerifiedEmail){
-                return 
-            }
         }
     },
+    //if authenticated redirect to home page
+    middleware({app,redirect}){
+      if (app.$auth.loggedIn){
+        return redirect('/')
+      }
+    }
 }
 </script>
 

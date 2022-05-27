@@ -13,7 +13,6 @@
 import NavBar from '../components/common/navbar.vue'
 export default {
   setup() {
-
   },
   components:{NavBar},
 }

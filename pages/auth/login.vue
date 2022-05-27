@@ -1,13 +1,6 @@
 <template>
     <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="6" align="center">
-            <!-- alert -->
-            <div v-if="$store.getters.errors">
-                <alert type="error" :message="$store.getters.errors"/>
-            </div>
-            <div v-if="$store.getters.success">
-                <alert :type="success" :message="$store.getters.success"/>
-            </div>
             <!-- form -->
             <form action="" method="post" @submit.prevent="submit">
                 <div class="input-auth d-flex align-center multi-inputs my-4 py-2">
@@ -17,7 +10,7 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="ورود" class="auth-btn white--text">
+                  <v-btn class="auth-btn white--text" @click="submit" :loading="loading">ورود</v-btn>
                 </div>
             </form>
         </v-col>
@@ -25,12 +18,14 @@
 </template>
 
 <script>
-import alert from '../../components/partials/alert.vue'
 export default {
     layout:'auth',
-    components:{alert},
+    head:{
+      title:'ورود به سایت'
+    },
     data(){
         return{
+            loading:false,
             form:{
               email:'',
               password:''
@@ -39,8 +34,25 @@ export default {
     },
     methods:{
         submit(){
-            this.$store.dispatch('login',this.form);
+          this.loading = true
+            this.$auth.loginWith('laravelSanctum',{data:this.form}).then((res)=>{
+              this.loading = false
+            }).catch((er)=>{
+              this.loading = false
+              this.$swal({
+                type:'error',
+                title:'خطا!',
+                text:er.response.data.errors,
+                confirmButtonText:'باشه'
+              })
+            })
         }
+    },
+  //if authenticated redirect to home page
+  middleware({app,redirect}){
+    if (app.$auth.loggedIn){
+      return redirect('/')
     }
+  }
 }
 </script>

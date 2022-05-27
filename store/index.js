@@ -37,14 +37,20 @@ export default ()=>{
           'id':0
         })
         state.options = content.category
-        console.log(JSON.stringify(content))
       }
     },
     actions:{
       async nuxtServerInit({commit}){
+        //CATEGORY
         await this.$axios.get('/category').then(function (res){
           commit('SET_CATEGORY',{'category':res.data.category})
-        })
+        }).catch(er=>console.log(er.response))
+        //HEADER
+        await this.$axios.get('/show-header').then(function (res){
+          if(res.data.header){
+            commit('common/SHOW_HEADER',res.data)
+          }
+        });
       },
       //  category
       async category({commit},category){

@@ -47,9 +47,37 @@ export default {
     'cookie-universal-nuxt',
     '@nuxtjs/auth-next',
   ],
+  auth:{
+    strategies:{
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: 'http://localhost:8000',
+        endpoints:{
+          login:{
+            url: '/api/auth/login'
+          },
+          logout:{
+            method:'post',
+            url:'/api/auth/logout'
+          },
+          user:{
+            url:'/api/user'
+          }
+        },
+        user:{
+          provider: false
+        }
+      }
+    },
+    redirect:{
+      login: '/auth/login',
+      home: '/dashboard/main',
+      logout:'/'
+    }
+  },
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api',
-    withCredentials:true
+    baseURL: 'http://localhost:8000/api',
+    credentials:true
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
