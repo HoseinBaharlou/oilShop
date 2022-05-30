@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import article from './modules/article'
 import common from './modules/common'
+import usersManager from './modules/usersManager'
 export default ()=>{
   return  new Vuex.Store({
     state:{
@@ -14,6 +15,7 @@ export default ()=>{
           'id':0
         }
       ],
+      users:null
     },
     mutations:{
       CATEGORY(state,content){
@@ -81,6 +83,7 @@ export default ()=>{
     modules:{
       article,
       common,
+      usersManager
     }
   })
 }

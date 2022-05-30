@@ -47,7 +47,7 @@ export default {
           this.verifyLoading = true //loading btn
           let data = {
               code:this.code,
-              email:this.$cookies.get('email')
+              email:this.$cookies.get('email') ? this.$cookies.get('email') : this.$auth.user.email
             }
 
             this.$axios.post('/auth/otp',data).then((res)=>{
@@ -76,7 +76,7 @@ export default {
         },
         async sendCode(){
           this.sendCodeLoading = true //loading btn
-          await this.$axios.$post('auth/sendEmailVerify',{'email':this.$cookies.get('email')}).then((res)=>{
+          await this.$axios.$post('auth/sendEmailVerify',{'email':this.$cookies.get('email') ? this.$cookies.get('email') : this.$auth.user.email}).then((res)=>{
             this.sendCodeLoading = false //unload
             this.$swal({
                 type:'success',
