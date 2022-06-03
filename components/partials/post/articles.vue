@@ -2,7 +2,7 @@
     <v-row class="article">
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -31,13 +31,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -66,13 +66,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -101,13 +101,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -136,13 +136,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -171,13 +171,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -206,13 +206,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -241,13 +241,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -276,13 +276,13 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
 
         <v-col md="3" cols="12" class="my-11">
             <article class="px-0 mx-0">
-            <!-- start img article -->
+            <!-- start img post -->
             <v-img src="image/closeup-view-cylindrical-grinder-industrial-concept.png">
                 <section class="content">
                     <!-- start title -->
@@ -311,7 +311,7 @@
                     <!-- end date and writer -->
                 </section>
             </v-img>
-            <!-- end img article -->
+            <!-- end img post -->
             </article>
         </v-col>
     </v-row>

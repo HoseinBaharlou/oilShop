@@ -121,7 +121,7 @@ export default {
       console.log(event.target.value)
       this.keyword[index] = event.target.value
     },
-    //send article to backend
+    //send post to backend
     async save_article(){
       //true loaded
       this.loaded = true

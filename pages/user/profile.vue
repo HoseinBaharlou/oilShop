@@ -101,11 +101,17 @@ export default {
     //update profile
     update_profile(){
       this.$axios.$post('profile',this.form).then((res)=>{
-        console.log(res)
         this.$swal({
           type:'success',
-          title:'موفق!',
+          title:'موفق',
           text:res.success,
+          confirmButtonText:'باشه'
+        })
+      }).catch((er)=>{
+        this.$swal({
+          type:'error',
+          title:'خطا!',
+          text:er.response.data.errors,
           confirmButtonText:'باشه'
         })
       })

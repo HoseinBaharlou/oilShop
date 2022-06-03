@@ -5,21 +5,23 @@
       color="primary"
       v-for="(item,index) in navbar"
     >
-      <v-list shaped v-if="item.submenu">
-        <v-list-group
-          no-action
-          :prepend-icon="item.icon"
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>{{item.title}}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-          <v-list-item link v-for="(submenu,index) in item.submenu" :key="index" :to="submenu.link" v-if="canShowLinks(submenu.permissions)">
-            <v-list-item-title>{{submenu.title}}</v-list-item-title>
-          </v-list-item>
-        </v-list-group>
-      </v-list>
+      <div v-if="canShowLinks(item.permissions)">
+        <v-list shaped v-if="item.submenu">
+          <v-list-group
+            no-action
+            :prepend-icon="item.icon"
+          >
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>{{item.title}}</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item link v-for="(submenu,index) in item.submenu" :key="index" :to="submenu.link" v-if="canShowLinks(submenu.permissions)">
+              <v-list-item-title>{{submenu.title}}</v-list-item-title>
+            </v-list-item>
+          </v-list-group>
+        </v-list>
+      </div>
 
       <div v-if="!item.submenu">
         <v-list-item :to="item.link" v-if="canShowLinks(item.permissions)">
@@ -80,7 +82,8 @@ export default {
         {'icon':'mdi-view-dashboard-outline','title':'داشبرد','link':'/dashboard/main','permissions':['show_admin_panel']},
         {'icon':'mdi-tune-vertical','title':'نمای تجاری','link':'/dashboard/Tradeview','permissions':['show_admin_panel']},
         {'icon':'mdi-file-outline','title':'مدیریت فایل','link':'/dashboard/fileManager','permissions':['file_manager']},
-        {'icon':'mdi-account-multiple-outline','title':'مدیریت کاربران','submenu':[{'title':'لیست کاربران','link':'user-manager','permissions':['users_list']}, {'title':'مدیریت نقش های کاربر','link':'role-manager','permissions':['role_list']}],'permissions':['users_list']},
+        {'icon':'mdi-account-multiple-outline','title':'مدیریت کاربران','submenu':[{'title':'لیست کاربران','link':'/dashboard/user-manager','permissions':['users_list']}, {'title':'مدیریت نقش های کاربر','link':'/dashboard/role-manager','permissions':['role_list']}],'permissions':['users_list']},
+        {'icon':'mdi-store-outline','title':'مدیریت محصولات','submenu':[{'title':'لیست محصولات','link':'/dashboard/product/list','permissions':['product_list']},{'title':'ایجاد محصول','link':'/dashboard/product/create','permissions':['product_create']}, {'title':'سطل زباله','link':'trash','permissions':['product_trash_manager']}],'permissions':['product_list']},
         {'icon':'mdi-store-outline','title':'مدیریت محصولات','submenu':[{'title':'لیست محصولات','link':'/dashboard/product/list','permissions':['product_list']},{'title':'ایجاد محصول','link':'/dashboard/product/create','permissions':['product_create']}, {'title':'سطل زباله','link':'trash','permissions':['product_trash_manager']}],'permissions':['product_list']},
         {'icon':'mdi-calendar-range','title':'تقویم','link':'/dashboard/calendar','permissions':['show_panel']},
         {'icon':'mdi-message-processing','title':'پیام ها','link':'/dashboard/Message','permissions':['ticket_manager']},

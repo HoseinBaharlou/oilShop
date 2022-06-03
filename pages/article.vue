@@ -9,27 +9,27 @@
                         <v-divider></v-divider>
                     </v-col>
                     <!-- end breadcrumbs -->
-                    
+
                     <!-- start filter -->
                     <v-col cols="12" md="2">
                         <filterArticle class="mt-md-11"/>
                     </v-col>
                     <!-- end filter -->
 
-                    <!-- start article -->
+                    <!-- start post -->
                     <v-col cols="12" md="10">
                         <Article/>
                     </v-col>
-                    <!-- end article -->
-                </v-row>    
-            </v-col> 
+                    <!-- end post -->
+                </v-row>
+            </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import filterArticle from '../components/partials/article/filter.vue'
-import Article from '../components/partials/article/articles.vue'
+import filterArticle from '../components/partials/post/filter.vue'
+import Article from '../components/partials/post/articles.vue'
 export default {
     components:{filterArticle,Article},
     data:()=>{

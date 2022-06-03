@@ -14,11 +14,11 @@
                         <Writer/>
                     </v-col>
                     <!-- end writer -->
-                    <!-- start article -->
+                    <!-- start post -->
                     <v-col cols="12" md="10">
                         <Article/>
                     </v-col>
-                    <!-- end article -->
+                    <!-- end post -->
 
                     <!-- start comment -->
                     <v-col cols="12" md="10" offset="2">
@@ -54,17 +54,17 @@
                     <!-- start write comment -->
 
                     <!-- end write comment -->
-                </v-row>    
-            </v-col> 
+                </v-row>
+            </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import Article from '../components/partials/article/article.vue'
-import Writer from '../components/partials/article/writer.vue'
-import comment from '../components/partials/article/comment.vue'
-import writeComment from '../components/partials/article/writeComment.vue'
+import Article from '../components/partials/post/article.vue'
+import Writer from '../components/partials/post/writer.vue'
+import comment from '../components/partials/post/comment.vue'
+import writeComment from '../components/partials/post/writeComment.vue'
 export default {
     components:{Article,Writer,comment,writeComment},
     data:()=>{
