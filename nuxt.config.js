@@ -27,7 +27,6 @@ export default {
   plugins: [
     {src : '~/plugins/vue-apexchart.js', ssr : false},
     {src : '~/plugins/vue2-google-maps.js', ssr : false},
-    {src : '~/plugins/dropzone.js', ssr : false},
     {src : '~/plugins/Vselect.js', ssr : false}
   ],
 
@@ -77,7 +76,7 @@ export default {
   },
   axios: {
     baseURL: 'http://localhost:8000/api',
-    credentials:true
+    credentials:true,
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

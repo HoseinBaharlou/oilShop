@@ -1,11 +1,12 @@
 import Vuex from 'vuex'
-import article from './modules/article'
-import common from './modules/common'
-import usersManager from './modules/usersManager'
+import article from '@/store/modules/article'
+import common from '@/store/modules/common'
+import Product from "@/store/modules/product";
+import usersManager from '@/store/modules/usersManager'
 export default ()=>{
   return  new Vuex.Store({
     state:{
-      BackendUrl : 'http://127.0.0.1:8000/api',
+      BackendUrl : 'http://localhost:8000/api',
       success:'',
       errors:'',
       status:'',
@@ -76,14 +77,14 @@ export default ()=>{
         return state.errors
       },
       category(state){
-
-        return state.menu
+        return state.options
       }
     },
     modules:{
       article,
       common,
-      usersManager
+      usersManager,
+      Product
     }
   })
 }

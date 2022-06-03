@@ -32,15 +32,17 @@
               <!-- start avatar item -->
               <v-list dense class="px-5">
                 <v-list-item class="custom-avatar-panel white">
-                  <v-list-item-avatar>
-                    <v-img src="../icons/Profile_image.svg" />
+                  <v-list-item-avatar v-if="$auth.user.profile_src">
+                    <v-img :src="$auth.user.profile_src" />
                   </v-list-item-avatar>
 
-                  <v-list-item-title>احسان مهدوی</v-list-item-title>
+                  <v-icon v-else x-large>mdi-account</v-icon>
 
-                  <v-btn class="light-blue darken-1 white--text" small elevation="0">
-                    $ 52
-                  </v-btn>
+                  <v-list-item-title>{{$auth.user.name}}</v-list-item-title>
+
+<!--                  <v-btn class="light-blue darken-1 white&#45;&#45;text" small elevation="0">-->
+<!--                    $ 52-->
+<!--                  </v-btn>-->
                 </v-list-item>
               </v-list>
               <!-- end avatar item -->

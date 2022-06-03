@@ -32,9 +32,15 @@
                   <v-list-item-title>خروج از پنل</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item to="/dashboard/main">
+                <v-list-item to="/dashboard/main" v-if="canShowLinks(['show_admin_panel'])">
                   <v-list-item-title>
                     مشاهده پنل مدیریت
+                  </v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/user/profile">
+                  <v-list-item-title>
+                    پروفایل کاربری
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -166,6 +172,9 @@ export default {
     async logout(){
       await this.$auth.logout()
     },
+    canShowLinks(permissions){
+      return permissions.some(permissions=>this.$auth.user.permission.includes(permissions))
+    }
   },
   computed:{
     isAuthenticated(){

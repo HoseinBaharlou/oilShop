@@ -24,7 +24,7 @@ export default {
       store.dispatch("usersManager/users_list", res.data.users)
     })
     //get all permission and role for show to user
-    await $axios.get('/roles').then(function (res) {
+    await $axios.get('/user_roles').then(function (res) {
       store.dispatch("usersManager/roles_list", res.data.roles)
       store.dispatch("usersManager/permission_list", res.data.permissions)
 
