@@ -137,7 +137,6 @@ export default {
      })
   },
   created() {
-    console.log( this.$store.getters["Product/product"])
     this.form.title = this.$store.getters["Product/product"].title
     this.form.volume = this.$store.getters["Product/product"].volume
     this.form.unit = this.$store.getters["Product/product"].unit

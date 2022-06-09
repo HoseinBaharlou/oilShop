@@ -97,7 +97,7 @@ export default{
       }
     }
   },
-  middleware:['check-auth','auth']
+  middleware:['check-auth','auth','check-permission']
 }
 </script>
 <style>

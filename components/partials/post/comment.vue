@@ -1,37 +1,118 @@
 <template>
-    <v-card class="comment">
+    <div>
+      <v-card class="comment">
         <!-- title -->
         <v-card-title class="justify-space-between">
-            <h5>حسین بهارلو</h5>
+          <h5>{{data.user.name}}</h5>
 
-            <h5>1397/05/01</h5>
+          <h5>{{$moment(data.created_at).fromNow()}}</h5>
         </v-card-title>
 
         <v-divider></v-divider>
         <!-- comment -->
         <v-card-text>
-            <p>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-            </p>
+          <p>
+            {{data.content}}
+          </p>
         </v-card-text>
         <!-- like and show and share -->
         <v-card-actions class="justify-end">
-            <v-badge overlap left color="white" content="222" class="mx-3 order-3">
-                <v-icon color="red">mdi-thumb-up-outline</v-icon>
-            </v-badge>
+          <v-icon v-if="$auth.loggedIn && canDeleteComment(['delete_comment'])" @click="deleteComment" class="mx-2">mdi-trash-can-outline</v-icon>
 
-            <v-badge overlap left color="white" content="222" class="mx-3 order-2">
-                <v-icon color="red">mdi-eye-outline</v-icon>
-            </v-badge>
-
-            <button  class="mx-3 order-1">
-                <v-icon color="red">mdi-share-variant-outline</v-icon>
-            </button>
-
+          <v-icon v-if="$auth.loggedIn" @click="showReply = true" class="mx-2">mdi-undo</v-icon>
         </v-card-actions>
-    </v-card>
-</template>
+      </v-card>
+<!--      write comment-->
+      <div v-if="showReply">
+        <!-- form -->
+        <v-form class="w-100">
+          <v-textarea auto-grow label="پاسخ خود را بنویسید..." v-model="reply.content" outlined class="mt-3"></v-textarea>
+        </v-form>
 
+        <!-- send comment -->
+
+        <div class="d-flex justify-space-between align-center w-100">
+          <div>
+            <span class="mx-2">تعداد کلمات:255</span>
+          </div>
+          <v-spacer></v-spacer>
+          <v-btn color="info" @click="cancelReply" class="white--text mx-2">لغو پاسخ</v-btn>
+          <v-btn color="green" class="white--text mx-2" @click="saveReply">ارسال پاسخ</v-btn>
+        </div>
+      </div>
+<!--      replies-->
+      <comment class="ml-10" v-for="item in data.replies" :key="item.id" :data="item"/>
+    </div>
+</template>
+<script>
+import writeComment from "@/components/partials/post/writeComment";
+import {ref,useRoute,useStore} from '@nuxtjs/composition-api'
+import axios from 'axios'
+import swal from 'sweetalert2'
+export default {
+  props:['data','margin'],
+  setup(props){
+    //state
+    const showReply = ref(false);
+    const route = useRoute();
+    const store = useStore();
+    const reply = ref({
+      content:null,
+      comment_id:props.data.id
+    })
+    //methods
+    const saveReply = ()=>{
+      axios.post(`${store.state.BackendUrl}/comments/replies/${route.value.params.id}`,reply.value,{
+        withCredentials:true
+      }).then(res=>{
+        swal({
+          type:'success',
+          title:'موفق',
+          text:res.data.success,
+          confirmButtonText:'باشه'
+        })
+      }).catch(er=>{
+        swal({
+          type:'error',
+          title:'خطا!',
+          text:er.response.data.errors,
+          confirmButtonText:'باشه'
+        })
+      })
+    }
+
+    const cancelReply = ()=>{
+      showReply.value = false
+      reply.value.content = null
+    }
+
+
+    const deleteComment = ()=>{
+      axios.delete(`${store.state.BackendUrl}/comments/${props.data.id}`,{withCredentials:true}).then(res=>{
+        swal({
+          type:'success',
+          title:'موفق',
+          text:res.data.success,
+          confirmButtonText:'باشه'
+        })
+      })
+    }
+    return {
+      showReply,
+      reply,
+      cancelReply,
+      saveReply,
+      deleteComment
+    }
+  },
+  components:{writeComment},
+  methods:{
+    canDeleteComment(permissions){
+      return permissions.some(permissions=>this.$auth.user.permission.includes(permissions))
+    },
+  }
+}
+</script>
 <style lang='scss'>
 .show-article{
     .v-badge__badge{

@@ -1,16 +1,18 @@
 <template>
   <v-card>
-    <!--    title-->
-    <v-card-title>ایجاد خبرنامه</v-card-title>
-    <v-divider class="custom-line"></v-divider>
+    <v-card-title>
+      ویرایش پست
+    </v-card-title>
+    <v-divider></v-divider>
+
     <!--   input and other -->
-    <v-card-actions class="mt-16">
+    <v-card-text class="mt-16">
       <v-row>
         <v-col cols="12" md="10" offset-md="1">
           <!--          category and title-->
           <v-row>
             <v-col cols="12" md="6">
-              <v-text-field outlined v-model="title" label="عنوان خبرنامه..." @keyup="CharacterTitle"></v-text-field>
+              <v-text-field outlined v-model="title" label="عنوان پست..." @keyup="CharacterTitle"></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6">
@@ -60,6 +62,11 @@
               <v-btn outlined color="white" class="px-16 mx-10 my-3" height="42" @click="add_keyword" width="178"><v-icon>mdi-plus</v-icon></v-btn>
             </section>
           </v-sheet>
+          <!--          upload file-->
+          <div class="mt-3">
+            <v-img :src="image" max-width="100" max-height="100"/>
+          </div>
+          <v-file-input @change="uploadFile($event)"></v-file-input>
           <!--          length text and title and other-->
           <div class="mt-10 d-flex justify-space-around flex-wrap">
             <p>تعداد کاراکتر متن:{{textChar}}</p>
@@ -68,20 +75,20 @@
           </div>
           <!--          save-->
           <div class="d-flex justify-md-end justify-center my-10">
-            <v-btn @click="save_News" color="green" class="white--text" :loading="loaded" width="213">
+            <v-btn @click="save_post" color="green" class="white--text" :loading="loaded" width="213">
               <span>ذخیره تغییرات</span>
             </v-btn>
           </div>
         </v-col>
       </v-row>
-    </v-card-actions>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "News",
-  layout:'dashboard',
+  name: "_id",
+  layout:'edit',
   data(){
     return{
       text:'',
@@ -93,7 +100,11 @@ export default {
       writer: '',
       picker:'',
       selected:'',
-      loaded:false
+      loaded:false,
+      file:null,
+      width:600,
+      height:600,
+      image:null
     }
   },
   methods:{
@@ -122,20 +133,26 @@ export default {
       this.keyword[index] = event.target.value
     },
     //send post to backend
-    async save_News(){
+    async save_post(){
       //true loaded
       this.loaded = true
       //input data for send backend
-      const News = {
-        'title':this.title,
-        'text':this.text,
-        'writer':this.writer,
-        'keyword':this.keyword,
-        'category':this.selected.id,
-        'date':this.picker
+      const Fd = new FormData()
+
+      Fd.append('title',this.title);
+      Fd.append('text',this.text);
+      Fd.append('writer',this.writer);
+      Fd.append('keyword[]',this.keyword);
+      Fd.append('category',this.selected.id);
+      Fd.append('date',this.picker);
+      if(this.file){
+        Fd.append('file',this.file,this.file.name);
       }
+      Fd.append('width',this.width)
+      Fd.append('height',this.height)
       //send request
-      this.$axios.post('/news',News).then((res)=>{
+      this.$axios.post(`/post/${this.$route.params.id}/update`,Fd).then((res)=>{
+        console.log(res)
         this.loaded = false
         this.$swal({
           type:'success',
@@ -152,7 +169,39 @@ export default {
           confirmButtonText:'باشه'
         })
       })
-    }
+    },
+    //upload file
+    uploadFile(event){
+      this.file = event
+      const reader = new FileReader()
+
+      reader.onload = (image)=>{
+        this.image = image.target.result
+      }
+      reader.readAsDataURL(this.file)
+    },
+  },
+  async asyncData({$axios,store,route}){
+    await $axios.get(`post/${route.params.id}/edit`).then(res=>store.dispatch('post/show_post',res.data.post))
+  },
+  created() {
+    this.title = this.$store.getters["post/show_post"].title
+    this.text = this.$store.getters["post/show_post"].text
+    this.writer = this.$store.getters["post/show_post"].writer
+    this.keyword = this.$store.getters["post/show_post"].keyword.split(',');
+    this.picker = this.$store.getters["post/show_post"].updated_at
+    let category_id = this.$store.getters["post/show_post"].category_id
+    this.TitleChar = this.$store.getters["post/show_post"].title.length
+    this.textChar = this.$store.getters["post/show_post"].text.length
+    this.lengthKey = this.keyword.length
+    this.image = this.$store.getters["post/show_post"].file
+    let selected = {}
+    this.$store.getters.category.forEach(function (elem){
+      if (elem.id === category_id){
+        selected = {id:elem.id,label:elem.label}
+      }
+    })
+    this.selected = selected
   }
 }
 </script>

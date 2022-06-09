@@ -30,7 +30,7 @@
 
 <script>
 import filterArticle from '../components/partials/post/filter.vue'
-import Article from '../components/partials/post/articles.vue'
+import Article from '../components/partials/post/posts.vue'
 export default {
     components:{filterArticle,Article},
     data:()=>{

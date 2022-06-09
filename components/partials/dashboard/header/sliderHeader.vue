@@ -6,19 +6,19 @@
         <v-radio label="فعال کردن حالت اسلایدر عکس انتخاب شده هدر را غیر فعال میکند" color="green" value="1"></v-radio>
       </v-radio-group>
 <!--      image uploaded-->
-<!--      <div class="overflow-auto" v-if="$store.getters['common/header_slider']">-->
-<!--        <v-row class="flex-nowrap">-->
-<!--          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].url">-->
-<!--            <v-img :src="item" />-->
-<!--          </v-col>-->
-<!--        </v-row>-->
+      <div class="overflow-auto" v-if="$store.getters['common/header_slider']">
+        <v-row class="flex-nowrap">
+          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].url">
+            <v-img :src="item" />
+          </v-col>
+        </v-row>
 
-<!--        <v-row class="flex-nowrap">-->
-<!--          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].name">-->
-<!--            <v-btn @click="remove_File(item,index)" text block>حذف فایل</v-btn>-->
-<!--          </v-col>-->
-<!--        </v-row>-->
-<!--      </div>-->
+        <v-row class="flex-nowrap">
+          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].name">
+            <v-btn @click="remove_File(item,index)" text block>حذف فایل</v-btn>
+          </v-col>
+        </v-row>
+      </div>
       <!--          images size-->
       <div class="d-flex justify-space-around my-5">
         <v-text-field label="عرض تصاویر" v-model="width" filled outlined class="mx-3"></v-text-field>
@@ -27,17 +27,7 @@
       </div>
 <!--      image uploader-->
       <div>
-        <vue2-dropzone id="dropzone" :options="dropZoneOptions" :useCustomSlot="true" @vdropzone-success="UploadFiles" ref="dropzone_header" v-on:vdropzone-sending="sendingFormData">
-          <v-row>
-            <v-col cols="12" class="">
-              <p>عکس انتخاب شده را اینجاد بکشید و رها کنید یا روی ایکون کلیک کنید</p>
-
-              <div class="d-flex justify-center">
-                <v-img src="../image/icons8-upload-to-cloud-64.png" max-width="64" max-height="64"></v-img>
-              </div>
-            </v-col>
-          </v-row>
-        </vue2-dropzone>
+        <v-file-input ref="uploadFiles" accept="image/png, image/jpeg, image/bmp" id="uploadFiles" multiple></v-file-input>
       </div>
       <!--    btn updated at and created at-->
       <v-row>
@@ -69,34 +59,49 @@ export default {
       Slider:0,
       width:'',
       height:'',
-      name:'',
-      dropZoneOptions:{
-        url:this.$store.state.BackendUrl+'/slider-header',
-        maxFiles: 100,
-        autoProcessQueue:false,
-        addRemoveLinks:true,
-        autoDiscover:false,
-        uploadMultiple: true,
-        parallelUploads: 100,
-      }
+      file:[],
     }
   },
   methods:{
-    UploadFiles:function (file,response){
-      this.$store.dispatch("common/header_slider",response)
-    },
-    sendingFormData:function (file,xhr,FormData){
-      FormData.append('width',this.width);
-      FormData.append('height',this.height);
-      FormData.append('slider',this.Slider);
-    },
     saveSlider(){
-      this.$refs.dropzone_header.processQueue();
+      const Fd = new FormData()
+      const files = this.$refs.uploadFiles.$refs.input.files;
+      const total_files = this.$refs.uploadFiles.$refs.input.files.length;
+      for(let i = 0;i<total_files;i++){
+        Fd.append('file[]',files[i])
+      }
+      Fd.append('width',this.width)
+      Fd.append('height',this.height)
+      Fd.append('slider',this.Slider)
+      console.log(Fd)
+      this.$axios.post('/slider-header',Fd, {headers: {
+        'Content-Type': 'multipart/form-data'
+      }}).then((res)=>{
+        console.log(res)
+        this.$swal({
+          type:'success',
+          title:'موفق',
+          text:res.data.success,
+          confirmButtonText:'باشه'
+        })
+      }).catch((er)=>{
+        this.$swal({
+          type:'error',
+          title:'خطا!',
+          text:er.response.data.errors,
+          confirmButtonText:'باشه'
+        })
+      })
     },
     remove_File(name,index){
       this.$store.state["common"].multiImageHeader.url.splice(index,1);
       this.$store.state["common"].multiImageHeader.name.splice(index,1);
       this.$axios.post('/delete-file',{'name':name,'type':'image','isPrivate':false}).then(res=>console.log(res)).catch(er=>console.log(er.response.data));
+    },
+    changeUploader(event){
+      for(let i = 0;i<event.length;i++){
+        this.file.push(event[i])
+      }
     }
   },
   created() {

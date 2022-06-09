@@ -2,8 +2,8 @@
     <v-card elevation="0" class="show-article">
         <!-- title -->
         <v-card-title class="justify-space-between elevation-3">
-            <h4>روغن گل</h4>
-            <h4>1397/01/07</h4>
+            <h4>{{title}}</h4>
+            <h4>{{updated_at}}</h4>
         </v-card-title>
         <!-- text -->
         <v-card-text class="elevation-3 mt-5 pa-4">
@@ -16,22 +16,68 @@
             <v-card-actions class="justify-space-between mt-3">
                 <div>
                     <span>تعداد کلمات:</span>
-                    <span>555</span>
+                    <span>{{text.length}}</span>
                 </div>
 
                 <div>
-                    <button class="mx-5">
-                        <v-icon color="blue">mdi-share-variant-outline</v-icon>
-                    </button>
-                    <v-badge overlap left color="white" content="222">
-                        <v-icon color="red">mdi-thumb-up-outline</v-icon>
+                    <v-dialog max-width="200" class="white">
+                      <template v-slot:activator="{attr,on}">
+                        <button class="mx-5" v-bind="attr" v-on="on">
+                          <v-icon color="blue">mdi-share-variant-outline</v-icon>
+                        </button>
+                      </template>
+
+                      <v-card>
+                        <v-card-text class="d-flex justify-space-around pt-3">
+                          <social_sahring network="telegram" :title="title" :text="text" :url="url">
+                            <v-icon color="blue">mdi-navigation-variant-outline</v-icon>
+                          </social_sahring>
+
+                          <social_sahring network="whatsapp" :title="title" :text="text" :url="url">
+                            <v-icon color="green">mdi-whatsapp</v-icon>
+                          </social_sahring>
+                        </v-card-text>
+                      </v-card>
+                    </v-dialog>
+                    <v-badge overlap left color="white" :content="likesCount ? likesCount : '0'">
+                        <v-icon :color="isLiked ? 'red' : 'grey'" @click="likePost">mdi-thumb-up-outline</v-icon>
                     </v-badge>
                 </div>
             </v-card-actions>
         </v-card-text>
     </v-card>
 </template>
+<script>
+import social_sahring from "@/components/partials/post/social_sahring";
+export default {
+  props:['title','text','updated_at','likes_count','is_liked'],
+  components:{social_sahring},
+  data(){
+    return{
+      isLiked:false,
+      likesCount:0,
+      url:null
+    }
+  },
+  methods:{
+    likePost(){
+      this.isLiked = !this.isLiked
 
+      let reqType = this.isLiked ? 'post' : 'delete';
+      this.$axios[reqType](`likes/${this.$route.params.id}`).then(()=>
+        this.isLiked ? this.likesCount++ : this.likesCount--
+      )
+    },
+  },
+  created() {
+    this.isLiked = this.is_liked
+    this.likesCount = this.likes_count
+    if (process.client){
+      this.url = window.location.href
+    }
+  }
+}
+</script>
 <style lang='scss'>
 .show-article{
     .v-badge__badge{

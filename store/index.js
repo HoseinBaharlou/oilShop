@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
-import article from '@/store/modules/article'
+import post from '@/store/modules/post/post'
+import showPost from '@/store/modules/post/showPost'
 import common from '@/store/modules/common'
 import Product from "@/store/modules/product";
 import usersManager from '@/store/modules/usersManager'
@@ -58,7 +59,7 @@ export default ()=>{
       //  category
       async category({commit},category){
         // send category
-        this.$axios.post('/category',{'title':category.title,'parent_id':category.parent_id}).then(
+        this.$axios.post('/category',{'title':category.title,'parent_id':category.parent_id,'type':category.type}).then(
           function (response){
             commit('CATEGORY',{'success':response.data.success})
           }
@@ -81,7 +82,8 @@ export default ()=>{
       }
     },
     modules:{
-      article,
+      post,
+      showPost,
       common,
       usersManager,
       Product

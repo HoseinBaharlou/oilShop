@@ -27,7 +27,6 @@ export default {
     await $axios.get('/user_roles').then(function (res) {
       store.dispatch("usersManager/roles_list", res.data.roles)
       store.dispatch("usersManager/permission_list", res.data.permissions)
-
     })
   }
 }

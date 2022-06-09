@@ -22,6 +22,8 @@
           </div>
 <!--          category-->
           <v-select v-model="selected" :options="$store.state.options" dir="ltr"></v-select>
+          <!-- category type-->
+          <v-select v-model="selected_type" :options="categoryType" dir="ltr" class="mt-3"></v-select>
 <!--          input-->
           <v-text-field filled outlined label="عنوان" class="mt-5" v-model="title"></v-text-field>
           <v-btn color="light-green" class="white--text" @click="save">ثبت</v-btn>
@@ -38,7 +40,20 @@ export default {
   components:{alert},
   data(){
     return{
-
+      categoryType:[
+        {
+          id:'shop',
+          label: 'فروشگاه',
+        },
+        {
+          id:'post',
+          label: 'پست'
+        }
+      ],
+      selected_type:{
+        id:0,
+        label: 'نوع دسته بندی را انتخاب کنید'
+      },
       category: [],
       selected:{
         'label':'گروه اصلی',
@@ -52,7 +67,8 @@ export default {
       //save category
       this.category={
         'title':this.title,
-        'parent_id':this.selected.id
+        'parent_id':this.selected.id,
+        'type':this.selected_type.id
       }
       this.$store.dispatch('category',this.category)
     }

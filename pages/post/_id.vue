@@ -11,12 +11,12 @@
                     <!-- end breadcrumbs -->
                     <!-- start writer -->
                     <v-col cols="12" md="2">
-                        <Writer/>
+                        <Writer :writer="$store.getters['showPost/show_post'].writer" :updated_at="$store.getters['showPost/show_post'].updated_at"/>
                     </v-col>
                     <!-- end writer -->
                     <!-- start post -->
                     <v-col cols="12" md="10">
-                        <Article/>
+                        <Article :title="$store.getters['showPost/show_post'].title" :text="$store.getters['showPost/show_post'].text" :is_liked="$store.getters['showPost/show_post'].is_liked" :likes_count="$store.getters['showPost/show_post'].likes_count"/>
                     </v-col>
                     <!-- end post -->
 
@@ -27,7 +27,7 @@
                                 نظرات کاربران
                             </v-tab>
 
-                            <v-tab>نوشتن نظر</v-tab>
+                            <v-tab v-if="$auth.loggedIn">نوشتن نظر</v-tab>
                         </v-tabs>
 
                         <v-tabs-items v-model="tab" class="mt-10">
@@ -35,11 +35,15 @@
                                 <v-col cols="12" md="8">
                                     <!-- comments -->
                                     <v-tab-item>
-                                        <comment/>
+                                      <v-alert v-if="!$store.getters['showPost/show_post'].comments[0]" class="white--text" color="info" v-model="alert">
+                                        اولین شخصی باشید که برای این پست نظر خود را ثبت میکنید.
+                                      </v-alert>
+
+                                      <comment v-else class="my-5" v-for="item in $store.getters['showPost/show_post'].comments" :key="item.id" :data="item" />
                                     </v-tab-item>
                                 </v-col>
 
-                                <v-col cols="12">
+                                <v-col cols="12" v-if="$auth.loggedIn">
                                     <!-- write comment -->
                                     <v-tab-item>
                                         <writeComment/>
@@ -61,28 +65,33 @@
 </template>
 
 <script>
-import Article from '../components/partials/post/article.vue'
-import Writer from '../components/partials/post/writer.vue'
-import comment from '../components/partials/post/comment.vue'
-import writeComment from '../components/partials/post/writeComment.vue'
+import Article from '../../components/partials/post/article.vue'
+import Writer from '../../components/partials/post/writer.vue'
+import comment from '../../components/partials/post/comment.vue'
+import writeComment from '../../components/partials/post/writeComment.vue'
 export default {
-    components:{Article,Writer,comment,writeComment},
-    data:()=>{
-        return{
-            tab:null,
-            items: [
-                {
-                    text: 'صفحه اصلی',
-                    disabled: true,
-                    href: 'breadcrumbs_dashboard',
-                },
-                {
-                    text: 'مقالات',
-                    disabled: true,
-                    href: 'breadcrumbs_dashboard',
-                },
-            ],
-        }
+  components:{Article,Writer,comment,writeComment},
+  data:()=>{
+    return{
+      tab:null,
+      items: [
+        {
+            text: 'صفحه اصلی',
+            disabled: true,
+            href: 'breadcrumbs_dashboard',
+        },
+        {
+            text: 'مقالات',
+            disabled: true,
+            href: 'breadcrumbs_dashboard',
+        },
+      ],
     }
+  },
+  async asyncData({store,$axios,route}){
+    await $axios.get(`/posts/${route.params.id}`).then(res=>{
+      store.dispatch('showPost/show_post',res.data.post)
+    })
+  },
 }
 </script>

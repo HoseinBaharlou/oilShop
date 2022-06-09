@@ -6,13 +6,13 @@
           <!-- start links -->
           <div class="d-none d-md-block">
               <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">صفحه اصلی</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">محصولات</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">مقالات</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">خبرنامه</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">تماس با ما</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">درباره ما</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">ارسال آنالیز</nuxt-link>
-              <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">گالری تصاویر</nuxt-link>
+              <div v-for="item in $store.getters.category" :key="item.id" class="d-inline">
+                <nuxt-link :to="`${item.type}/${item.id}`" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">{{item.label}}</nuxt-link>
+              </div>
+              <nuxt-link to="/tell_me" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">تماس با ما</nuxt-link>
+              <nuxt-link to="/about" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">درباره ما</nuxt-link>
+              <nuxt-link to="/analyse" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">ارسال آنالیز</nuxt-link>
+              <nuxt-link to="/gallery" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">گالری تصاویر</nuxt-link>
           </div>
           <v-spacer></v-spacer>
           <!-- card -->
@@ -109,19 +109,11 @@
         <v-list-item>
           <v-list-item-title>صفحه اصلی</v-list-item-title>
         </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>محصولات</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>مقالات</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>خبرنامه</v-list-item-title>
-        </v-list-item>
-
+        <div v-for="item in $store.getters.category" :key="item.id">
+          <v-list-item  :to="`${item.type}/${item.id}`">
+            <v-list-item-title>{{item.label}}</v-list-item-title>
+          </v-list-item>
+        </div>
         <v-list-item>
           <v-list-item-title>تماس با ما</v-list-item-title>
         </v-list-item>
@@ -152,7 +144,8 @@ export default {
           drawer:false,
           group:'null',
           app:false,
-          absolute:null
+          absolute:null,
+          category:[]
       }
   },
   created: function () {
@@ -174,12 +167,15 @@ export default {
     },
     canShowLinks(permissions){
       return permissions.some(permissions=>this.$auth.user.permission.includes(permissions))
-    }
+    },
   },
   computed:{
     isAuthenticated(){
       return this.$store.getters.isAuthenticated;
     },
+  },
+  mounted() {
+    this.category = this.$store.getters.category
   }
 }
 </script>

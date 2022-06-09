@@ -10,7 +10,7 @@
 <!--          category and title-->
           <v-row>
             <v-col cols="12" md="6">
-              <v-text-field outlined v-model="title" label="عنوان مقاله..." @keyup="CharacterTitle"></v-text-field>
+              <v-text-field outlined v-model="title" label="عنوان پست..." @keyup="CharacterTitle"></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6">
@@ -60,6 +60,8 @@
               <v-btn outlined color="white" class="px-16 mx-10 my-3" height="42" @click="add_keyword" width="178"><v-icon>mdi-plus</v-icon></v-btn>
             </section>
           </v-sheet>
+<!--          upload file-->
+          <v-file-input @change="uploadFile($event)"></v-file-input>
 <!--          length text and title and other-->
           <div class="mt-10 d-flex justify-space-around flex-wrap">
             <p>تعداد کاراکتر متن:{{textChar}}</p>
@@ -80,7 +82,7 @@
 
 <script>
 export default {
-  name: "article",
+  name: "post",
   layout:'dashboard',
   data(){
     return{
@@ -93,7 +95,10 @@ export default {
       writer: '',
       picker:'',
       selected:'',
-      loaded:false
+      loaded:false,
+      file:null,
+      width:600,
+      height:600
     }
   },
   methods:{
@@ -126,16 +131,19 @@ export default {
       //true loaded
       this.loaded = true
       //input data for send backend
-      const article = {
-        'title':this.title,
-        'text':this.text,
-        'writer':this.writer,
-        'keyword':this.keyword,
-        'category':this.selected.id,
-        'date':this.picker
-      }
+      const Fd = new FormData()
+
+      Fd.append('title',this.title);
+      Fd.append('text',this.text);
+      Fd.append('writer',this.writer);
+      Fd.append('keyword[]',this.keyword);
+      Fd.append('category',this.selected.id);
+      Fd.append('date',this.picker);
+      Fd.append('file',this.file,this.file.name);
+      Fd.append('width',this.width)
+      Fd.append('height',this.height)
       //send request
-      this.$axios.post('/article',article).then((res)=>{
+      this.$axios.post('/post',Fd).then((res)=>{
         this.loaded = false
         this.$swal({
           type:'success',
@@ -152,6 +160,10 @@ export default {
           confirmButtonText:'باشه'
         })
       })
+    },
+    //upload file
+    uploadFile(event){
+      this.file = event
     }
   },
 }

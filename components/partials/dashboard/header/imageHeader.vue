@@ -16,7 +16,7 @@
           </button>
           <span class="font-size-15 white--text">
                 کلمات کلیدی را مشخص کنید تعداد تکرار کلمات کلیدی باید بین 3 تا 6 بار باشد
-              </span>
+          </span>
         </div>
       </div>
 <!--      image info and upload file-->
@@ -55,15 +55,10 @@
             <v-text-field label="ارتفاع تصاویر" v-model="height" filled outlined class="mx-3"></v-text-field>
           </div>
 <!--          upload-->
-          <vue2-dropzone :options="dropzoneOptions" id="dropzone" :useCustomSlot="true" @vdropzone-success="uploadSingleFile" ref="dropzone_header" v-on:vdropzone-sending="sendingEvent">
-            <v-row>
-              <v-col cols="12" class="d-flex align-center justify-space-around">
-                <p>عکس انتخاب شده را اینجاد بکشید و رها کنید یا روی ایکون کلیک کنید</p>
-
-                <v-img src="../image/icons8-upload-to-cloud-64.png" max-width="64" max-height="64"></v-img>
-              </v-col>
-            </v-row>
-          </vue2-dropzone>
+          <!--        image-->
+          <v-col cols="10">
+            <v-file-input @change="changeUploader($event)" accept="image/png, image/jpeg, image/bmp"></v-file-input>
+          </v-col>
         </v-col>
         <!--    btn updated at and created at-->
         <v-col cols="12" class="mt-5">
@@ -94,34 +89,41 @@ export default {
     return{
       width:'',
       height:'',
-      dropzoneOptions:{
-        url:this.$store.state.BackendUrl+'/image-header',
-        maxFilesize: 2,
-        maxFiles: 1,
-        autoProcessQueue: false,
-        addRemoveLinks:true,
-        autoDiscover:false
-      },
+      file:null
     }
   },
   methods:{
     SaveSingleFile(){
-      this.$refs.dropzone_header.processQueue();
+      const Fd = new FormData()
+      Fd.append('file',this.file)
+      Fd.append('width',this.width)
+      Fd.append('height',this.height)
+      this.$axios.post('/image-header',Fd).then((res)=>{
+        console.log(res)
+        this.$swal({
+          type:'success',
+          title:'موفق',
+          text:res.data.success,
+          confirmButtonText:'باشه'
+        })
+      }).catch((er)=>{
+        this.$swal({
+          type:'error',
+          title:'خطا!',
+          text:er.response.data.errors,
+          confirmButtonText:'باشه'
+        })
+      })
     },
-    uploadSingleFile(file,response){
-      this.$store.dispatch('common/header_image',response)
-    },
-    sendingEvent:function(file, xhr, formData) {
-      formData.append("width", this.width);
-      formData.append("height", this.height);
-    },
+    changeUploader(event){
+      this.file = event
+    }
   },
   created() {
     if (this.$store.state["common"].singleFile){
       this.width = this.$store.state["common"].width
       this.height = this.$store.state["common"].height
       this.Slider = this.$store.state["common"].slider
-      console.log(this.$store.state["common"].width)
     }
   }
 }

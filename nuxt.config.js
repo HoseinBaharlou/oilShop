@@ -37,14 +37,20 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    'nuxt-moment-jalaali',
+    '@nuxtjs/composition-api/module'
   ],
-
+  moment:{
+    defaultLocale: 'fa',
+    locales: ['fa']
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
     'nuxt-sweetalert2',
     'cookie-universal-nuxt',
     '@nuxtjs/auth-next',
+    'vue-social-sharing/nuxt'
   ],
   auth:{
     strategies:{

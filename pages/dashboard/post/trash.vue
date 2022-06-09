@@ -14,14 +14,14 @@
       </thead>
 
       <tbody v-if="$store.getters['post/trash']">
-      <tr v-for="(item,index) in $store.getters['Product/trash']">
+      <tr v-for="(item,index) in $store.getters['post/trash']">
         <td>{{item.id}}</td>
         <td>{{item.title}}</td>
         <td class="pa-2">
           <v-img :src="item.file" max-width="100"/>
         </td>
         <td>
-          {{item.body.slice(0,50)}}...
+          {{item.text.slice(0,50)}}...
         </td>
         <td>
           <div class="d-flex justify-space-between align-center">
@@ -54,16 +54,16 @@ export default {
   name: "index.vue",
   layout:'dashboard',
   asyncData({store,$axios}){
-    $axios.get('/product/trash').then((res)=>{
+    $axios.get('/post/trash').then((res)=>{
       console.log(res.data.trash)
-      store.dispatch('Product/trash',res.data.trash)
+      store.dispatch('post/trash',res.data.trash)
     })
   },
   methods:{
     //restore product
     restore(id,index){
-      this.$axios.get(`/product/${id}/restore`).then((res)=>{
-        this.$store.getters["Product/trash"].splice(index,1)
+      this.$axios.get(`/post/${id}/restore`).then((res)=>{
+        this.$store.getters["post/trash"].splice(index,1)
         this.$swal({
           type:'success',
           title:'موفق',
@@ -74,9 +74,9 @@ export default {
     },
     //destroy product
     destroy(id,index){
-      this.$axios.get(`/product/${id}/destroy`).then((res)=>{
+      this.$axios.get(`/post/${id}/destroy`).then((res)=>{
         //remove of store
-        this.$store.getters["Product/trash"].splice(index,1)
+        this.$store.getters["post/trash"].splice(index,1)
         //res
         this.$swal({
           type:'success',
