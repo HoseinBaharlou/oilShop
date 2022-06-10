@@ -11,7 +11,7 @@
               </div>
               <nuxt-link to="/tell_me" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">تماس با ما</nuxt-link>
               <nuxt-link to="/about" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">درباره ما</nuxt-link>
-              <nuxt-link to="/analyse" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">ارسال آنالیز</nuxt-link>
+              <nuxt-link to="/analyze" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">ارسال آنالیز</nuxt-link>
               <nuxt-link to="/gallery" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">گالری تصاویر</nuxt-link>
           </div>
           <v-spacer></v-spacer>

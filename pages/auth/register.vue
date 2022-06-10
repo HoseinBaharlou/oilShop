@@ -108,7 +108,7 @@ export default {
 
         }
     },
-    //if authenticated redirect to home page
+  //if authenticated redirect to home page
     middleware({app,redirect}){
       if (app.$auth.loggedIn){
         return redirect('/')

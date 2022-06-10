@@ -3,11 +3,13 @@ import post from '@/store/modules/post/post'
 import showPost from '@/store/modules/post/showPost'
 import common from '@/store/modules/common'
 import Product from "@/store/modules/product";
+import analyze from "@/store/modules/analyze";
 import usersManager from '@/store/modules/usersManager'
 export default ()=>{
   return  new Vuex.Store({
     state:{
       BackendUrl : 'http://localhost:8000/api',
+      baseUrl:'http://localhost:8000',
       success:'',
       errors:'',
       status:'',
@@ -86,7 +88,8 @@ export default ()=>{
       showPost,
       common,
       usersManager,
-      Product
+      Product,
+      analyze
     }
   })
 }
