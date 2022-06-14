@@ -46,13 +46,13 @@ export default {
   data(){
     return{
       form:{
-        name:null,
-        last_name:null,
-        email:null,
-        phone_number:null,
-        address:null,
-        profile:null,
-        profile_name:null
+        name:'',
+        last_name:'',
+        email:'',
+        phone_number:'',
+        address:'',
+        profile:'',
+        profile_name:''
       }
     }
   },
@@ -89,6 +89,11 @@ export default {
     //  delete profile
     delete_profile(){
       this.$axios.delete('profile?file_name='+this.$auth.user.profile).then(res=>this.$auth.user.profile_src = null)
+    }
+  },
+  middleware({app,redirect}){
+    if(!app.$auth.loggedIn){
+      return redirect('/auth/login')
     }
   },
   created() {

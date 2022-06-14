@@ -9,16 +9,22 @@
       <v-col cols="12" md="10" offset-md="1">
         <SliderHeader class="rounded-l-xl pa-5" />
       </v-col>
+
+<!--      title and subtitle-->
+      <v-col cols="12" md="10" offset-md="1">
+        <Content/>
+      </v-col>
     </v-row>
 </template>
 
 <script>
 import imageHeader from "@/components/partials/dashboard/header/imageHeader";
 import SliderHeader from "@/components/partials/dashboard/header/sliderHeader";
+import Content from "@/components/partials/dashboard/header/content";
 export default {
   name: "mainHeader",
   layout:'dashboard',
-  components:{imageHeader,SliderHeader},
+  components:{Content, imageHeader,SliderHeader},
 }
 </script>
 

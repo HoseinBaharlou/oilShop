@@ -62,7 +62,7 @@ export default {
     })
     //methods
     const saveReply = ()=>{
-      axios.post(`${store.state.BackendUrl}/comments/replies/${route.value.params.id}`,reply.value,{
+      axios.post(`${process.env.baseUrlApi}/comments/replies/${route.value.params.id}`,reply.value,{
         withCredentials:true
       }).then(res=>{
         swal({
@@ -88,7 +88,7 @@ export default {
 
 
     const deleteComment = ()=>{
-      axios.delete(`${store.state.BackendUrl}/comments/${props.data.id}`,{withCredentials:true}).then(res=>{
+      axios.delete(`${process.env.baseUrlApi}/comments/${props.data.id}`,{withCredentials:true}).then(res=>{
         swal({
           type:'success',
           title:'موفق',

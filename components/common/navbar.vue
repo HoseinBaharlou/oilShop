@@ -2,12 +2,12 @@
     <section>
       <!-- start app bar -->
       <v-app-bar height="86" absolute elevation="0">
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-block d-md-none"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon class="d-block d-md-none" @click="drawer = !drawer"></v-app-bar-nav-icon>
           <!-- start links -->
           <div class="d-none d-md-block">
               <nuxt-link to="/" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">صفحه اصلی</nuxt-link>
               <div v-for="item in $store.getters.category" :key="item.id" class="d-inline">
-                <nuxt-link :to="`${item.type}/${item.id}`" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">{{item.label}}</nuxt-link>
+                <nuxt-link :to="`/${item.type}/${encodeURIComponent(item.label)}`" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">{{item.label}}</nuxt-link>
               </div>
               <nuxt-link to="/tell_me" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">تماس با ما</nuxt-link>
               <nuxt-link to="/about" class="black--text text-decoration-none font-size-15 mx-4 custom-nuxt-link">درباره ما</nuxt-link>
@@ -92,10 +92,8 @@
       <!-- start navbar mobile -->
         <v-navigation-drawer
     v-model="drawer"
-    :app='app'
-    :absolute='absolute'
+    absolute
     right
-
   >
     <v-list
       nav
@@ -110,7 +108,7 @@
           <v-list-item-title>صفحه اصلی</v-list-item-title>
         </v-list-item>
         <div v-for="item in $store.getters.category" :key="item.id">
-          <v-list-item  :to="`${item.type}/${item.id}`">
+          <v-list-item  :to="`/${item.type}/${item.title}`">
             <v-list-item-title>{{item.label}}</v-list-item-title>
           </v-list-item>
         </div>
@@ -147,18 +145,6 @@ export default {
           absolute:null,
           category:[]
       }
-  },
-  created: function () {
-    // navbar responsive
-    if(process.client){
-      if(window.innerWidth < 960){
-        this.absolute = false
-        this.app = true
-      }else{
-        this.absolute = true
-        this.app = false
-      }
-    }
   },
   // logout
   methods:{

@@ -9,9 +9,9 @@
 <!-- actions-->
     <v-card-actions class="mt-2 d-block">
       <!-- start alert -->
-      <div class="d-flex justify-space-between w-100 blue px-3 py-1 rounded-l-xl">
+      <div class="d-flex justify-space-between w-100 blue px-3 py-1 rounded-l-xl" v-show="alert">
         <div>
-          <button @click="alert = false">
+          <button @click="alert = !alert">
             <v-icon color="white">mdi-close</v-icon>
           </button>
           <span class="font-size-15 white--text">
@@ -64,7 +64,7 @@
         <v-col cols="12" class="mt-5">
           <v-row>
             <v-col cols="12" md="9">
-              <v-btn block color="green" height="69" class="white--text" @click="SaveSingleFile">ذخیره تغییرات</v-btn>
+              <v-btn block color="green" height="69" class="white--text" @click="SaveSingleFile" :loading="loading">ذخیره تغییرات</v-btn>
             </v-col>
             <v-col cols="12" md="3">
               <v-tooltip bottom color="primary">
@@ -89,17 +89,20 @@ export default {
     return{
       width:'',
       height:'',
-      file:null
+      file:null,
+      loading:false,
+      alert:false
     }
   },
   methods:{
     SaveSingleFile(){
+      this.loading = true //load btn
       const Fd = new FormData()
       Fd.append('file',this.file)
       Fd.append('width',this.width)
       Fd.append('height',this.height)
       this.$axios.post('/image-header',Fd).then((res)=>{
-        console.log(res)
+        this.loading = false //load btn
         this.$swal({
           type:'success',
           title:'موفق',
@@ -107,6 +110,7 @@ export default {
           confirmButtonText:'باشه'
         })
       }).catch((er)=>{
+        this.loading = false //load btn
         this.$swal({
           type:'error',
           title:'خطا!',

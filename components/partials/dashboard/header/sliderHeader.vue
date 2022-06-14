@@ -9,12 +9,8 @@
       <div class="overflow-auto" v-if="$store.getters['common/header_slider']">
         <v-row class="flex-nowrap">
           <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].url">
-            <v-img :src="item" />
-          </v-col>
-        </v-row>
+            <v-img :src="item" :lazy-src="item" />
 
-        <v-row class="flex-nowrap">
-          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].name">
             <v-btn @click="remove_File(item,index)" text block>حذف فایل</v-btn>
           </v-col>
         </v-row>
@@ -34,7 +30,7 @@
         <v-col cols="12" class="mt-5">
           <v-row>
             <v-col cols="12" md="9">
-              <v-btn block color="green" height="69" class="white--text" @click="saveSlider">ذخیره تغییرات</v-btn>
+              <v-btn block color="green" height="69" class="white--text" @click="saveSlider" :loading="loading">ذخیره تغییرات</v-btn>
             </v-col>
             <v-col cols="12" md="3">
               <v-tooltip bottom color="primary">
@@ -60,15 +56,17 @@ export default {
       width:'',
       height:'',
       file:[],
+      loading:false
     }
   },
   methods:{
     saveSlider(){
+      this.loading = true //load btn
       const Fd = new FormData()
       const files = this.$refs.uploadFiles.$refs.input.files;
       const total_files = this.$refs.uploadFiles.$refs.input.files.length;
       for(let i = 0;i<total_files;i++){
-        Fd.append('file[]',files[i])
+        Fd.append('file[]',files[i],files.name)
       }
       Fd.append('width',this.width)
       Fd.append('height',this.height)
@@ -77,7 +75,7 @@ export default {
       this.$axios.post('/slider-header',Fd, {headers: {
         'Content-Type': 'multipart/form-data'
       }}).then((res)=>{
-        console.log(res)
+        this.loading = false //load btn
         this.$swal({
           type:'success',
           title:'موفق',
@@ -85,6 +83,7 @@ export default {
           confirmButtonText:'باشه'
         })
       }).catch((er)=>{
+        this.loading = false //load btn
         this.$swal({
           type:'error',
           title:'خطا!',
@@ -94,9 +93,10 @@ export default {
       })
     },
     remove_File(name,index){
+      let file_name = name.split('/')
       this.$store.state["common"].multiImageHeader.url.splice(index,1);
       this.$store.state["common"].multiImageHeader.name.splice(index,1);
-      this.$axios.post('/delete-file',{'name':name,'type':'image','isPrivate':false}).then(res=>console.log(res)).catch(er=>console.log(er.response.data));
+      this.$axios.post('/delete-file',{'name':file_name[file_name.length-1],'type':'image','isPrivate':false}).then(res=>console.log(res)).catch(er=>console.log(er.response.data));
     },
     changeUploader(event){
       for(let i = 0;i<event.length;i++){

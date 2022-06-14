@@ -62,7 +62,6 @@ export default {
   methods:{
     likePost(){
       this.isLiked = !this.isLiked
-
       let reqType = this.isLiked ? 'post' : 'delete';
       this.$axios[reqType](`likes/${this.$route.params.id}`).then(()=>
         this.isLiked ? this.likesCount++ : this.likesCount--

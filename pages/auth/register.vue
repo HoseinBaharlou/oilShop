@@ -80,34 +80,37 @@ export default {
         }
     },
     methods:{
-        register(){
-          //enable loading
-          this.loading = true
-          //send request for register
-          this.$axios.post('auth/register',this.form).then((res)=>{
-            this.loading = false
-            this.$cookies.set('email',this.form.email)
-            this.$swal({
-              type:'success',
-              title:'موفق',
-              text:res.data.success,
-              confirmButtonText:'باشه'
-            }).then(()=>{
-                this.$router.push('/auth/verify');
-              }
-            );
-          }).catch((er)=>{
-            this.loading = false
-            this.$swal({
-              type:'error',
-              title:'خطا!',
-              text:er.response.data.errors,
-              confirmButtonText:'باشه'
-            })
-          });
+      register(){
+        //enable loading
+        this.loading = true
+        //send request for register
+        this.$axios.post('auth/register',this.form).then((res)=>{
+          this.loading = false
+          this.$cookies.set('email',this.form.email)
+          this.$swal({
+            type:'success',
+            title:'موفق',
+            text:res.data.success,
+            confirmButtonText:'باشه'
+          }).then(()=>{
+              this.$router.push('/auth/verify');
+            }
+          );
+        }).catch((er)=>{
+          this.loading = false
+          this.$swal({
+            type:'error',
+            title:'خطا!',
+            text:er.response.data.errors,
+            confirmButtonText:'باشه'
+          })
+        });
 
-        }
+      }
     },
+  async created() {
+
+  },
   //if authenticated redirect to home page
     middleware({app,redirect}){
       if (app.$auth.loggedIn){

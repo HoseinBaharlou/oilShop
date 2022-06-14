@@ -6,6 +6,10 @@ const common = {
       url:'test',
       name:'test'
     },
+    contentHeader:{
+      'title':'',
+      'subtitle':[]
+    },
     slider:'',
     width:'',
     height:'',
@@ -47,6 +51,10 @@ const common = {
       state.width = response.header.width
       state.height = response.header.height
       state.slider = response.header.slider
+
+      state.contentHeader.title = response.header.title
+      state.contentHeader.subtitle = response.header.subtitle.split(',')
+
     }
   },
   actions:{
@@ -67,6 +75,12 @@ const common = {
     // multi image header
     header_slider(state){
       return state.multiImageHeader
+    },
+    contentHeader(state){
+      return state.contentHeader
+    },
+    checkSlider(state){
+      return state.slider
     }
   }
 

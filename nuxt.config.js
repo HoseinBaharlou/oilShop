@@ -38,7 +38,8 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     'nuxt-moment-jalaali',
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
+    '@nuxtjs/dotenv'
   ],
   moment:{
     defaultLocale: 'fa',
@@ -56,7 +57,7 @@ export default {
     strategies:{
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: 'http://localhost:8000',
+        url: process.env.baseUrl,
         endpoints:{
           login:{
             method: 'post',
@@ -86,7 +87,7 @@ export default {
     }
   },
   axios: {
-    baseURL: 'http://localhost:8000/api',
+    baseURL: process.env.baseUrlApi,
     credentials: true
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

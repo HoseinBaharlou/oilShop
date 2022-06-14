@@ -4,21 +4,18 @@ import showPost from '@/store/modules/post/showPost'
 import common from '@/store/modules/common'
 import Product from "@/store/modules/product";
 import analyze from "@/store/modules/analyze";
+import category from "@/store/modules/category";
 import usersManager from '@/store/modules/usersManager'
 export default ()=>{
   return  new Vuex.Store({
     state:{
-      BackendUrl : 'http://localhost:8000/api',
-      baseUrl:'http://localhost:8000',
       success:'',
       errors:'',
       status:'',
       options: [ //option category
-        {
-          'label':'گروه اصلی',
-          'id':0
-        }
+
       ],
+      categories:[],
       users:null
     },
     mutations:{
@@ -26,10 +23,6 @@ export default ()=>{
         if (content.success){
           state.success = content.success
           this.$axios.get('/category').then(function (res){
-            res.data.category.unshift({
-              'label':'گروه اصلی',
-              'id':0
-            })
             state.options = res.data.category
           })
         }else {
@@ -38,11 +31,10 @@ export default ()=>{
       },
       //  set category
       SET_CATEGORY(state,content){
-        content.category.unshift({
-          'label':'گروه اصلی',
-          'id':0
-        })
         state.options = content.category
+      },
+      CATEGORIES(state,res){
+        state.categories = res
       }
     },
     actions:{
@@ -51,18 +43,24 @@ export default ()=>{
         await this.$axios.get('/category').then(function (res){
           commit('SET_CATEGORY',{'category':res.data.category})
         }).catch(er=>console.log(er.response))
+
+        await this.$axios.get('/categories').then(function (res){
+          commit('CATEGORIES',{'category':res.data.category})
+        }).catch(er=>console.log(er.response))
         //HEADER
         await this.$axios.get('/show-header').then(function (res){
           if(res.data.header){
             commit('common/SHOW_HEADER',res.data)
           }
         });
+
       },
       //  category
       async category({commit},category){
         // send category
         this.$axios.post('/category',{'title':category.title,'parent_id':category.parent_id,'type':category.type}).then(
           function (response){
+            console.log(response)
             commit('CATEGORY',{'success':response.data.success})
           }
         ).catch(
@@ -81,6 +79,9 @@ export default ()=>{
       },
       category(state){
         return state.options
+      },
+      categories(state){
+        return state.categories
       }
     },
     modules:{
@@ -89,7 +90,8 @@ export default ()=>{
       common,
       usersManager,
       Product,
-      analyze
+      analyze,
+      category
     }
   })
 }

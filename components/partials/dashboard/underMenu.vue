@@ -54,11 +54,11 @@ export default {
         id:0,
         label: 'نوع دسته بندی را انتخاب کنید'
       },
-      category: [],
       selected:{
-        'label':'گروه اصلی',
-        'id':0
+        id:0,
+        label: 'دسته بندی را انتخاب کنید'
       },
+      category: [],
       title:'',
     }
   },

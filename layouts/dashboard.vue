@@ -27,8 +27,8 @@
       <v-container>
         <v-row>
           <!-- start navigation mobile and desktop -->
-          <v-col md="3" v-show="drawer">
-            <v-navigation-drawer v-model="drawer" :stateless="stateless" class="white border-radius-20 elevation-9" :app="app" right>
+          <v-col md="3" v-show="drawer" class="overflow-hidden">
+            <v-navigation-drawer v-model="drawer" :stateless="stateless" class="white border-radius-20 elevation-9" height="700" :app="app" right>
               <!-- start avatar item -->
               <v-list dense class="px-5">
                 <v-list-item class="custom-avatar-panel white">
@@ -55,9 +55,7 @@
           <!-- end navigation mobile and desktop -->
           <!-- start render page -->
           <v-col md="9" cols="12">
-            <transition name="test" mode="out-in">
               <Nuxt />
-            </transition>
           </v-col>
           <!-- end render page -->
         </v-row>

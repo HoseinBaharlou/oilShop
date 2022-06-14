@@ -13,7 +13,7 @@
       </tr>
       </thead>
 
-      <tbody v-if="$store.getters['post/trash']">
+      <tbody v-if="$store.getters['Product/trash']">
       <tr v-for="(item,index) in $store.getters['Product/trash']">
         <td>{{item.id}}</td>
         <td>{{item.title}}</td>
@@ -53,9 +53,8 @@
 export default {
   name: "index.vue",
   layout:'dashboard',
-  asyncData({store,$axios}){
-    $axios.get('/product/trash').then((res)=>{
-      console.log(res.data.trash)
+  async asyncData({store,$axios}){
+    await $axios.get('/product/trash').then((res)=>{
       store.dispatch('Product/trash',res.data.trash)
     })
   },

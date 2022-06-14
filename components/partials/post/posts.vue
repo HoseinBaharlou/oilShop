@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/post/${to}`" class="article text-decoration-none">
+  <nuxt-link :to="`/post/show/${to}`" class="article text-decoration-none">
     <article class="px-0 mx-0">
       <!-- start img post -->
       <v-img :src="file">
