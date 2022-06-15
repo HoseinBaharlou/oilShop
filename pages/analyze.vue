@@ -14,8 +14,8 @@
                         <analyse/>
                     </v-col>
                     <!-- end information -->
-                </v-row>   
-            </v-col> 
+                </v-row>
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -24,7 +24,7 @@
 import analyse from '../components/partials/analyse/analyse.vue'
 export default {
     setup() {
-        
+
     },
     components:{analyse},
     data:()=>{
@@ -42,6 +42,11 @@ export default {
                 },
             ],
         }
+    },
+  middleware({app,redirect}){
+    if (!app.$auth.loggedIn){
+      return redirect('/auth/login')
     }
+  }
 }
 </script>

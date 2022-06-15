@@ -48,6 +48,11 @@ export default {
       ]
     }
   },
+  middleware({app,redirect}){
+    if (!app.$auth.loggedIn){
+      return redirect('/auth/login')
+    }
+  }
 
 }
 </script>
