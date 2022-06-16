@@ -6,6 +6,7 @@ import Product from "@/store/modules/product";
 import analyze from "@/store/modules/analyze";
 import category from "@/store/modules/category";
 import usersManager from '@/store/modules/usersManager'
+import tellMe from "~/store/modules/tellMe";
 export default ()=>{
   return  new Vuex.Store({
     state:{
@@ -91,7 +92,8 @@ export default ()=>{
       usersManager,
       Product,
       analyze,
-      category
+      category,
+      tellMe
     }
   })
 }

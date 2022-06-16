@@ -60,7 +60,7 @@ export default {
         {'icon':'mdi-account-multiple-outline','title':'مدیریت کاربران','submenu':[{'title':'لیست کاربران','link':'/dashboard/user-manager','permissions':['users_list']}, {'title':'مدیریت نقش های کاربر','link':'/dashboard/role-manager','permissions':['role_list']}],'permissions':['users_list']},
         {'icon':'mdi-store-outline','title':'مدیریت محصولات','submenu':[{'title':'لیست محصولات','link':'/dashboard/product/list','permissions':['product_list']},{'title':'ایجاد محصول','link':'/dashboard/product/create','permissions':['product_create']}, {'title':'سطل زباله','link':'trash','permissions':['product_trash_manager']}],'permissions':['product_list']},
         {'icon':'mdi-note-edit-outline','title':'مدیریت پست ها','submenu':[{'title':'لیست پست ها','link':'/dashboard/post/list','permissions':['post_list']},{'title':'ایجاد پست','link':'/dashboard/post/create','permissions':['create_post']}, {'title':'سطل زباله','link':'/dashboard/post/trash','permissions':['post_trash_manager']}],'permissions':['post_list']},
-        {'icon':'mdi-note-edit-outline','title':'مدیریت دیدگاه ها','submenu':[{'title':'لیست دیدگاه ها','link':'/dashboard/comment/list','permissions':['comment_manager']},],'permissions':['comment_manager']},
+        {'icon':'mdi-phone','title':'تماس با ما','link':'/dashboard/tellMe','permissions':['tellMe_manager']},
         {'icon':'mdi-calendar-range','title':'تقویم','link':'/dashboard/calendar','permissions':['show_admin_panel']},
         {'icon':'mdi-message-processing','title':'پیام ها','link':'/dashboard/Message','permissions':['ticket_manager']},
         {'icon':'mdi-home-outline','title':'تنظیمات صفحه اصلی','submenu':[
