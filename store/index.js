@@ -7,6 +7,7 @@ import analyze from "@/store/modules/analyze";
 import category from "@/store/modules/category";
 import usersManager from '@/store/modules/usersManager'
 import tellMe from "~/store/modules/tellMe";
+import pageManager from "@/store/modules/page_manager";
 export default ()=>{
   return  new Vuex.Store({
     state:{
@@ -55,6 +56,12 @@ export default ()=>{
           }
         });
 
+        await this.$axios.get('/content').then(function (res){
+            commit('CONTENTS',res.data.contents)
+        });
+
+        await this.$axios.get('/posts').then(res=>commit('post/POST_LIST',res.data.posts))
+
       },
       //  category
       async category({commit},category){
@@ -93,7 +100,8 @@ export default ()=>{
       Product,
       analyze,
       category,
-      tellMe
+      tellMe,
+      pageManager
     }
   })
 }

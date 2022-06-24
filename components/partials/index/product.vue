@@ -2,11 +2,8 @@
     <div class="custom-tab-wrapper">
         <!-- start title and description -->
         <v-container>
-            <h1 class="font-size-md-36 font-size-sm-25 text-center">محصولات ما</h1>
-
-            <p class="mt-5 text-center grey-darken-4--text">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-            </p>
+          <custom-editor @event_contents="body = $event" :namePage="namePage" :typePage="typePage" :value="body" @PageManager="canPageManager = $event" v-show="canPageManager"/>
+          <div v-html="body" v-if="body"></div>
         </v-container>
         <!-- end title and description -->
 
@@ -213,19 +210,35 @@
 </template>
 <script>
 import carousel from './slick_carousel.vue'
+import CustomEditor from "@/components/partials/customEditor";
 export default {
-    data:()=>{
-        return{
-            tab:null
-        }
-    },
-    components:{carousel}
+  data:()=>{
+    return{
+      tab:null,
+      body:null,
+      canPageManager:null
+    }
+  },
+  props:['namePage','typePage'],
+  components:{CustomEditor, carousel},
+  created(){
+    let namePage = this.namePage
+    let typePage = this.typePage
+    let content = ''
+    this.$store.getters.contentPage.filter(function (elem){
+      if (elem.name === namePage && elem.type === typePage){
+        content = elem.body
+      }
+    })
+
+    this.body = content
+  }
 }
 </script>
 
 <style lang='scss'>
 .custom-tab-wrapper{
-    .v-tabs-slider-wrapper{ 
+    .v-tabs-slider-wrapper{
         width: 0 !important;
         height: 0 !important;
     }

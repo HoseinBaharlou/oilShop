@@ -17,7 +17,7 @@
           </thead>
 
           <tbody>
-          <tr v-for="(item,index) in $store.getters['usersManager/rolesList']">
+          <tr v-for="item in $store.getters['usersManager/rolesList']">
             <td><span>{{item.name}}</span></td>
             <td><span>{{item.persian_name}}</span></td>
             <td>

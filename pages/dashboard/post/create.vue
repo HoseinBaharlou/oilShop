@@ -133,6 +133,12 @@ export default {
       //input data for send backend
       const Fd = new FormData()
 
+      if (!this.file){
+        alert('فایل باید انتخاب شود')
+        this.loaded = false
+        return
+      }
+
       Fd.append('title',this.title);
       Fd.append('text',this.text);
       Fd.append('writer',this.writer);

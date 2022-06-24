@@ -19,7 +19,7 @@
                     <!-- start post -->
                     <v-col cols="12" md="10">
                       <v-row>
-                        <v-col md="3" cols="12" class="my-11" v-for="item in $store.getters['showPost/post_list']">
+                        <v-col md="3" cols="12" class="my-11" v-for="item in $store.getters['showPost/post_list']" :key="item.id">
                           <Article :to="item.id" :like_count="item.likes_count" :file="item.file" :title="item.title" :writer="item.writer" :updated_at="item.updated_at.split(' ')[0]"/>
                         </v-col>
                       </v-row>
@@ -51,9 +51,6 @@ export default {
               },
           ],
       }
-  },
-  async asyncData({store,$axios}){
-    await $axios.get('/posts').then(res=>store.dispatch('showPost/post_list',res.data.posts))
   },
 }
 </script>

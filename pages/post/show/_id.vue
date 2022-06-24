@@ -65,6 +65,11 @@ import comment from '../../../components/partials/post/comment.vue'
 import writeComment from '../../../components/partials/post/writeComment.vue'
 export default {
   components:{Article,Writer,comment,writeComment},
+  head() {
+    return {
+      title: this.$store.getters['showPost/show_post'].title
+    };
+  },
   data:()=>{
     return{
       tab:null,

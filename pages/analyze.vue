@@ -26,6 +26,11 @@ export default {
     setup() {
 
     },
+    head(){
+      return{
+        title:'آنالیز'
+      }
+    },
     components:{analyse},
     data:()=>{
         return{

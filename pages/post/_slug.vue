@@ -17,7 +17,7 @@
           <!-- start post -->
           <v-col cols="12" md="10">
             <v-row>
-              <v-col md="3" cols="12" class="my-11" v-for="item in $store.getters['showPost/post_list'][0][0]">
+              <v-col md="3" cols="12" class="my-11" v-for="item in $store.getters['showPost/post_list'][0][0]" :key="item.id">
                 <Article :to="item.id" :like_count="item.likes_count" :file="item.file" :title="item.title" :writer="item.writer" :updated_at="item.updated_at.split(' ')[0]" :category_title="$route.params.slug"/>
               </v-col>
             </v-row>
@@ -35,6 +35,11 @@ import filterArticle from '../../components/partials/post/filter.vue'
 
 export default {
   name: "_slug",
+  head() {
+    return {
+      title: this.$route.params.slug
+    };
+  },
   data(){
     return{
       items: [

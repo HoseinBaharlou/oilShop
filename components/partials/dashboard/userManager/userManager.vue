@@ -33,7 +33,7 @@
             </div>
           </td>
           <td class="pa-2">
-            <v-chip v-for="roles in item.roles">{{roles.persian_name}}</v-chip>
+            <v-chip v-for="(roles,index) in item.roles" :key="index">{{roles.persian_name}}</v-chip>
             <add-role :role_user="roles_user(item.roles)" :permission_user="permission_user(item.permissions)" :id="item.id" :index="index+result_page" />
           </td>
           <td>

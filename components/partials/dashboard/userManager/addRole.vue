@@ -15,7 +15,7 @@
       <v-divider></v-divider>
       <v-card-text>
         <v-row>
-          <v-col md="4" cols="6"  v-for="(item,index) in this.$store.getters['usersManager/rolesList']">
+          <v-col md="4" cols="6"  v-for="(item,index) in this.$store.getters['usersManager/rolesList']" :key="index">
             <v-checkbox v-model="roles" :value="item.name" :label="item.persian_name"></v-checkbox>
           </v-col>
         </v-row>
@@ -27,7 +27,7 @@
       <v-divider></v-divider>
       <v-card-text>
         <v-row>
-          <v-col md="4" cols="6" v-for="(item,index) in this.$store.getters['usersManager/permissionList']">
+          <v-col md="4" cols="6" v-for="(item,index) in this.$store.getters['usersManager/permissionList']" :key="index">
             <v-checkbox v-model="permissions" :value="item.name" :label="item.persian_name"></v-checkbox>
           </v-col>
         </v-row>

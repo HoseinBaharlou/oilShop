@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="4" v-for="item in $store.getters.contents">
+      <v-col cols="12" md="4" v-for="item in $store.getters.contents" :key="item.id">
         <shop :data="item"/>
       </v-col>
     </v-row>
@@ -11,6 +11,11 @@
 <script>
 import shop from "@/components/partials/shop/shop";
 export default {
+  head() {
+    return {
+      title: this.$route.params.slug
+    };
+  },
   name: "_slug",
   async asyncData({store,$axios,route}){
     await $axios.get(`/categories/shop/${encodeURIComponent(route.params.slug)}`).then((res)=>{

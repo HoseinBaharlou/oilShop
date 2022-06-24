@@ -28,7 +28,7 @@
         <v-card-text>
           <v-card-text>
             <v-row>
-              <v-col md="4" cols="6" v-for="(item,index) in $store.getters['usersManager/update_roles'].listPermissions">
+              <v-col md="4" cols="6" v-for="item in $store.getters['usersManager/update_roles'].listPermissions" :key="item.id">
                 <v-checkbox v-model="permissions" :value="item.name" :label="item.persian_name"></v-checkbox>
               </v-col>
             </v-row>

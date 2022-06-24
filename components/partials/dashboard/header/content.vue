@@ -7,7 +7,7 @@
           <v-text-field label="عنوان" filled outlined v-model="title"></v-text-field>
         </v-col>
         <!--      subtitle-->
-        <v-col cols="10" v-for="(item,index) in subtitle">
+        <v-col cols="10" v-for="(item,index) in subtitle" :key="index">
           <input @change="Subtitle($event,index)" :value="item" class="rounded-lg w-100 py-3 px-3 custom-input"/>
         </v-col>
 
@@ -23,7 +23,6 @@
 
 <script>
 export default {
-  name: "content",
   data(){
     return{
       title:'',

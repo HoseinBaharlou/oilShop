@@ -14,8 +14,8 @@
                         <analyse/>
                     </v-col>
                     <!-- end information -->
-                </v-row>   
-            </v-col> 
+                </v-row>
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -24,9 +24,14 @@
 import analyse from '../components/partials/gallery/gallery.vue'
 export default {
     setup() {
-        
+
     },
     components:{analyse},
+    head(){
+      return{
+        title:'گالری'
+      }
+    },
     data:()=>{
         return{
             items: [

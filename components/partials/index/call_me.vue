@@ -1,10 +1,8 @@
 <template>
     <v-container>
         <!-- start title and content -->
-        <h1 class="font-size-md-36 font-size-sm-30 text-center">تماس با ما</h1>
-        <p class="mt-4 text-center">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-        </p>
+        <custom-editor @event_contents="body = $event" :namePage="namePage" :typePage="typePage" :value="body" @PageManager="canPageManager = $event" v-show="canPageManager"/>
+        <div v-html="body" v-if="body"></div>
         <!-- end title and content -->
 
         <!-- start form -->
@@ -41,9 +39,14 @@
 </template>
 
 <script>
+import CustomEditor from "@/components/partials/customEditor";
 export default {
+  components: {CustomEditor},
+  props:['namePage','typePage'],
   data(){
     return{
+      body:null,
+      canPageManager:null,
       loading:false,
       form:{
         fullName:'',
@@ -74,6 +77,18 @@ export default {
         })
       })
     }
+  },
+  created(){
+    let namePage = this.namePage
+    let typePage = this.typePage
+    let content = ''
+    this.$store.getters.contentPage.filter(function (elem){
+      if (elem.name === namePage && elem.type === typePage){
+        content = elem.body
+      }
+    })
+
+    this.body = content
   }
 }
 </script>

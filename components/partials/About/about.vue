@@ -1,19 +1,42 @@
 <template>
     <v-row>
         <!-- start title and content -->
-        <v-col cols="12" md="8">
-            <h1 class="deep-purple--text darken-4 text-center text-md-right">امین پالایش ایساتیس</h1>
-
-            <p class="font-size-25 mt-10 deep-purple--text text-center text-md-right">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-            </p>
+        <v-col cols="12" md="12">
+          <custom-editor @event_contents="body = $event" :namePage="namePage" :typePage="typePage" :value="body" @PageManager="canPageManager = $event" v-show="canPageManager"/>
+          <div v-html="body" v-if="body"></div>
         </v-col>
-        <!--  end title and content -->
 
-        <!-- start logo -->
-        <v-col cols="12" md="4" class="d-flex justify-center align-end">
-            <v-img src="image/WhatsApp Image 2021-02-14 at 10.56.03.png" lazy-src="image/WhatsApp Image 2021-02-14 at 10.56.03.png" max-height="403" max-width="403" />
-        </v-col>
-        <!-- end logo -->
     </v-row>
 </template>
+
+<script>
+import CustomEditor from "@/components/partials/customEditor";
+export default {
+  components: {CustomEditor},
+  head(){
+    return{
+      title:'درباره ما'
+    }
+  },
+  data(){
+    return{
+      body:null,
+      canPageManager:null,
+      namePage: 'index',
+      typePage: 'about'
+    }
+  },
+  created(){
+    let namePage = this.namePage
+    let typePage = this.typePage
+    let content = ''
+    this.$store.getters.contentPage.filter(function (elem){
+      if (elem.name === namePage && elem.type === typePage){
+        content = elem.body
+      }
+    })
+
+    this.body = content
+  }
+}
+</script>

@@ -9,7 +9,7 @@
         <!-- end title -->
         <!-- start item -->
         <div class="purple-text font-size-md-25 font-size-sm-20 items mr-3 mt-7">
-          <v-badge color="purple" left  offset-y="23" class="my-4" v-for="item in $store.getters['common/contentHeader'].subtitle">
+          <v-badge color="purple" left  offset-y="23" class="my-4" v-for="(item,index) in $store.getters['common/contentHeader'].subtitle" :key="index">
             <span class="mx-5">{{item}}</span>
           </v-badge>
         </div>

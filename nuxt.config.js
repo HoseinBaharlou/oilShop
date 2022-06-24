@@ -3,8 +3,6 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - oilApp',
-    title: 'oilApp',
     htmlAttrs: {
       lang: 'en'
     },
@@ -27,7 +25,7 @@ export default {
   plugins: [
     {src : '~/plugins/vue-apexchart.js', ssr : false},
     {src : '~/plugins/vue2-google-maps.js', ssr : false},
-    {src : '~/plugins/Vselect.js', ssr : false}
+    {src : '~/plugins/Vselect.js', ssr : false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -78,13 +76,14 @@ export default {
         user:{
           provider: false
         }
-      }
+      },
     },
     redirect:{
       login: '/auth/login',
       home: '/dashboard/main',
       logout:'/'
-    }
+    },
+    plugins: [ '~/plugins/canPageManager' ]
   },
   axios: {
     baseURL: process.env.baseUrlApi,

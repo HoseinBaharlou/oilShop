@@ -8,7 +8,7 @@
 <!--      image uploaded-->
       <div class="overflow-auto" v-if="$store.getters['common/header_slider']">
         <v-row class="flex-nowrap">
-          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].url">
+          <v-col cols="4" v-for="(item,index) in $store.getters['common/header_slider'].url" :key="index">
             <v-img :src="item" :lazy-src="item" />
 
             <v-btn @click="remove_File(item,index)" text block>حذف فایل</v-btn>

@@ -4,6 +4,7 @@
     <v-list-item-group
       color="primary"
       v-for="(item,index) in navbar"
+      :key="index"
     >
       <div v-if="canShowLinks(item.permissions)">
         <v-list shaped v-if="item.submenu">
